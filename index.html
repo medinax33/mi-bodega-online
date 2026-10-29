@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bodega Medina - Víveres, Panadería & Charcutería</title>
+    <title>Bodega Medina - Inventario & Pedidos</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Lucide Icons -->
@@ -47,7 +47,7 @@
                 Calidad y frescura para tu hogar
             </h2>
             <p class="text-blue-100 text-xs sm:text-sm max-w-xl mx-auto">
-                Selecciona tus víveres, pan fresco, charcutería y golosinas para enviar tu pedido a nuestra caja.
+                Selecciona tus artículos del inventario y envía tu pedido directamente a nuestra caja.
             </p>
         </div>
     </section>
@@ -65,7 +65,7 @@
         <!-- Search Input -->
         <div class="relative max-w-md mb-8">
             <i data-lucide="search" class="absolute left-3.5 top-3.5 w-5 h-5 text-slate-400"></i>
-            <input type="text" id="search-input" oninput="filterProducts()" placeholder="Buscar en esta sección..." 
+            <input type="text" id="search-input" oninput="filterProducts()" placeholder="Buscar producto..." 
                 class="w-full pl-10 pr-4 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white shadow-sm text-sm">
         </div>
 
@@ -111,19 +111,19 @@
     </div>
 
     <script>
-        // Listado de Productos
+        // Listado de Productos del Inventario
         const products = [
             // Víveres
             { id: 1, name: "Harina de Maíz PAN 1kg", price: 1.20, category: "Víveres", icon: "box" },
             { id: 2, name: "Arroz Mary Blanco 1kg", price: 1.10, category: "Víveres", icon: "box" },
             { id: 3, name: "Aceite Vegetal 1L", price: 2.50, category: "Víveres", icon: "box" },
             { id: 4, name: "Pasta Plumas 500g", price: 0.95, category: "Víveres", icon: "box" },
-            
-            // Panadería
+            { id: 19, name: "Sal 1kg", price: 0.45, category: "Víveres", icon: "box" },
+
+            // Pan
             { id: 11, name: "Pan Sobado (Bolsa)", price: 1.50, category: "Pan", icon: "sandwich" },
             { id: 12, name: "Pan Campesino Grande", price: 1.80, category: "Pan", icon: "sandwich" },
             { id: 13, name: "Pan de Sándwich", price: 2.20, category: "Pan", icon: "sandwich" },
-            { id: 14, name: "Pan Canilla", price: 0.80, category: "Pan", icon: "sandwich" },
 
             // Charcutería
             { id: 5, name: "Queso Blanco Duro (kg)", price: 5.50, category: "Charcutería", icon: "beef" },
@@ -131,18 +131,29 @@
             { id: 7, name: "Salchichas Paquete", price: 2.10, category: "Charcutería", icon: "beef" },
 
             // Chucherías
+            { id: 20, name: "Caramelos Freegels", price: 0.50, category: "Chucherías", icon: "cookie" },
+            { id: 21, name: "Galletas TAM", price: 0.66, category: "Chucherías", icon: "cookie" },
+            { id: 22, name: "Caramelos de Menta", price: 0.05, category: "Chucherías", icon: "cookie" },
+            { id: 23, name: "Caramelos Chaos Mora", price: 0.06, category: "Chucherías", icon: "cookie" },
+            { id: 24, name: "Chupetas", price: 0.25, category: "Chucherías", icon: "cookie" },
             { id: 15, name: "Papas Fritas Lay's", price: 1.00, category: "Chucherías", icon: "cookie" },
-            { id: 16, name: "Galletas de Chocolate", price: 0.85, category: "Chucherías", icon: "cookie" },
-            { id: 17, name: "Chocolate de Leche 100g", price: 1.50, category: "Chucherías", icon: "cookie" },
-            { id: 18, name: "Doritos Queso 150g", price: 1.25, category: "Chucherías", icon: "cookie" },
 
             // Bebidas
-            { id: 8, name: "Refresco 2 Litros", price: 2.00, category: "Bebidas", icon: "cup-soda" },
-            { id: 9, name: "Jugo Natural 1L", price: 1.80, category: "Bebidas", icon: "cup-soda" },
-            { id: 10, name: "Agua Minalba 1.5L", price: 0.80, category: "Bebidas", icon: "droplet" }
+            { id: 25, name: "Refresco Coca-Cola 355ml", price: 0.70, category: "Bebidas", icon: "cup-soda" },
+            { id: 26, name: "Refresco de Litro 1L", price: 1.10, category: "Bebidas", icon: "cup-soda" },
+            { id: 27, name: "Refresco Botella 1.25L", price: 1.00, category: "Bebidas", icon: "cup-soda" },
+            { id: 28, name: "Refresco 1.5L", price: 1.40, category: "Bebidas", icon: "cup-soda" },
+            { id: 29, name: "Refresco 2L", price: 1.80, category: "Bebidas", icon: "cup-soda" },
+
+            // Hogar / Varios
+            { id: 30, name: "Toallines Alisoft", price: 0.90, category: "Hogar", icon: "home" },
+            { id: 31, name: "Servilletas (Paquete)", price: 0.85, category: "Hogar", icon: "home" },
+            { id: 32, name: "Toallas Sanitarias", price: 0.85, category: "Hogar", icon: "home" },
+            { id: 33, name: "Vasos Plásticos Desechables", price: 0.06, category: "Hogar", icon: "home" },
+            { id: 34, name: "Yesquero / Encendedor", price: 0.25, category: "Hogar", icon: "flame" }
         ];
 
-        // Definición de Pestañas de Navegación
+        // Navegación de Pestañas
         const tabs = [
             { id: "Inicio", label: "Inicio", icon: "home", type: "category" },
             { id: "Víveres", label: "Víveres", icon: "shopping-bag", type: "category" },
@@ -150,6 +161,7 @@
             { id: "Charcutería", label: "Charcutería", icon: "beef", type: "category" },
             { id: "Chucherías", label: "Chucherías", icon: "cookie", type: "category" },
             { id: "Bebidas", label: "Bebidas", icon: "cup-soda", type: "category" },
+            { id: "Hogar", label: "Hogar / Varios", icon: "sparkles", type: "category" },
             { id: "Agua", label: "Agua Potable", icon: "droplet", type: "coming_soon" }
         ];
 
