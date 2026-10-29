@@ -43,13 +43,13 @@
     <section class="bg-gradient-to-br from-blue-900 via-blue-800 to-teal-800 text-white py-10 px-4">
         <div class="max-w-4xl mx-auto text-center space-y-3">
             <span class="bg-white/10 text-cyan-200 text-xs font-semibold px-3 py-1 rounded-full border border-white/20">
-                Atención rápida por WhatsApp
+                Atención rápida por WhatsApp • Tasa BCV activa
             </span>
             <h2 class="text-2xl sm:text-4xl font-extrabold tracking-tight">
                 Calidad y frescura para tu hogar
             </h2>
             <p class="text-blue-100 text-xs sm:text-sm max-w-xl mx-auto">
-                Selecciona tus artículos del inventario y envía tu pedido directamente a nuestra caja.
+                Coloca el cursor sobre cualquier precio para ver su equivalente automático en Bolívares.
             </p>
         </div>
     </section>
@@ -236,6 +236,9 @@
     </div>
 
     <script>
+        // Tasa oficial del BCV de referencia
+        const TASA_BCV = 888.39;
+
         // Inventario de Productos
         const products = [
             // Víveres
@@ -369,7 +372,14 @@
                     </div>
                     <div>
                         <h3 class="font-semibold text-slate-900">${p.name}</h3>
-                        <p class="text-lg font-bold text-blue-600 mt-1">$${p.price.toFixed(2)}</p>
+                        <!-- Contenedor de precio con efecto hover para bolívares -->
+                        <div class="price-container mt-1 cursor-pointer select-none inline-block group" 
+                             data-usd="${p.price}" 
+                             onmouseenter="showBolivares(this)" 
+                             onmouseleave="showDolares(this)">
+                            <p class="text-lg font-bold text-blue-600 price-text transition-colors">$${p.price.toFixed(2)}</p>
+                            <span class="text-[10px] text-slate-400 block -mt-1 font-medium group-hover:text-emerald-600 transition-colors">Tasa BCV (Pasa el cursor)</span>
+                        </div>
                     </div>
                     <button onclick="addToCart(${p.id})" class="mt-4 w-full bg-slate-900 hover:bg-slate-800 text-white font-medium py-2.5 rounded-xl transition flex items-center justify-center gap-2 text-sm">
                         <i data-lucide="plus" class="w-4 h-4"></i> Agregar
@@ -377,6 +387,30 @@
                 </div>
             `).join("");
             lucide.createIcons();
+        }
+
+        // Funciones para mostrar bolívares al pasar el mouse
+        function showBolivares(element) {
+            const usdPrice = parseFloat(element.getAttribute("data-usd"));
+            const bsPrice = usdPrice * TASA_BCV;
+            const textElement = element.querySelector(".price-text");
+            const subText = element.querySelector("span");
+            
+            textElement.innerHTML = `${bsPrice.toLocaleString('es-VE', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} Bs`;
+            textElement.classList.remove("text-blue-600");
+            textElement.classList.add("text-emerald-600");
+            subText.innerText = "Tasa BCV oficial";
+        }
+
+        function showDolares(element) {
+            const usdPrice = parseFloat(element.getAttribute("data-usd"));
+            const textElement = element.querySelector(".price-text");
+            const subText = element.querySelector("span");
+            
+            textElement.innerHTML = `$${usdPrice.toFixed(2)}`;
+            textElement.classList.remove("text-emerald-600");
+            textElement.classList.add("text-blue-600");
+            subText.innerText = "Tasa BCV (Pasa el cursor)";
         }
 
         function addToCart(productId) {
