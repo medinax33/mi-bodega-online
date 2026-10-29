@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bodega Medina - Víveres y Agua Potable</title>
+    <title>Bodega Medina - Víveres & Charcutería</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Lucide Icons -->
@@ -18,7 +18,7 @@
     <!-- Header Navigation -->
     <header class="sticky top-0 z-40 bg-white/95 backdrop-blur border-b border-slate-200 shadow-sm">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
-            <div class="flex items-center gap-3">
+            <div class="flex items-center gap-3 cursor-pointer" onclick="selectCategory('Inicio')">
                 <div class="w-10 h-10 rounded-xl bg-blue-600 flex items-center justify-center text-white font-bold text-xl shadow-md">
                     M
                 </div>
@@ -38,32 +38,35 @@
     </header>
 
     <!-- Hero Banner -->
-    <section class="bg-gradient-to-br from-blue-900 via-blue-800 to-teal-800 text-white py-12 px-4">
-        <div class="max-w-4xl mx-auto text-center space-y-4">
+    <section class="bg-gradient-to-br from-blue-900 via-blue-800 to-teal-800 text-white py-10 px-4">
+        <div class="max-w-4xl mx-auto text-center space-y-3">
             <span class="bg-white/10 text-cyan-200 text-xs font-semibold px-3 py-1 rounded-full border border-white/20">
                 Atención rápida por WhatsApp
             </span>
-            <h2 class="text-3xl sm:text-5xl font-extrabold tracking-tight">
-                Calidad y frescura cerca de ti
+            <h2 class="text-2xl sm:text-4xl font-extrabold tracking-tight">
+                Calidad y frescura para tu hogar
             </h2>
-            <p class="text-blue-100 text-sm sm:text-base max-w-xl mx-auto">
-                Víveres generales, charcutería y recarga de agua potable purificada en Bodega Medina.
+            <p class="text-blue-100 text-xs sm:text-sm max-w-xl mx-auto">
+                Selecciona tus víveres y charcutería favoritos y envía tu pedido directamente a nuestra caja.
             </p>
         </div>
     </section>
 
-    <!-- Main Content -->
+    <!-- Navigation Tabs & Content -->
     <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex-grow w-full">
-        <!-- Search & Filter Controls -->
-        <div class="flex flex-col md:flex-row gap-4 mb-8">
-            <div class="relative flex-1">
-                <i data-lucide="search" class="absolute left-3.5 top-3.5 w-5 h-5 text-slate-400"></i>
-                <input type="text" id="search-input" oninput="filterProducts()" placeholder="Buscar producto..." 
-                    class="w-full pl-10 pr-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white shadow-sm text-sm">
-            </div>
-            <div class="flex gap-2 overflow-x-auto pb-2 md:pb-0 scrollbar-none" id="categories-container">
-                <!-- Dynamic Category Buttons -->
-            </div>
+        
+        <!-- Category Navigation Tabs -->
+        <div class="border-b border-slate-200 mb-6">
+            <nav class="flex gap-2 overflow-x-auto pb-px scrollbar-none" id="tabs-container">
+                <!-- Navigation tabs dynamically injected here -->
+            </nav>
+        </div>
+
+        <!-- Search Input -->
+        <div class="relative max-w-md mb-8">
+            <i data-lucide="search" class="absolute left-3.5 top-3.5 w-5 h-5 text-slate-400"></i>
+            <input type="text" id="search-input" oninput="filterProducts()" placeholder="Buscar en esta sección..." 
+                class="w-full pl-10 pr-4 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white shadow-sm text-sm">
         </div>
 
         <!-- Catalog Grid -->
@@ -107,48 +110,100 @@
         </div>
     </div>
 
-    <!-- JavaScript App Logic -->
     <script>
+        // Listado de Productos
         const products = [
-            { id: 1, name: "Recarga Botellón 20L", price: 1.50, category: "Agua", icon: "droplet" },
-            { id: 2, name: "Harina de Maíz 1kg", price: 1.20, category: "Víveres", icon: "box" },
-            { id: 3, name: "Arroz Blanco 1kg", price: 1.10, category: "Víveres", icon: "box" },
-            { id: 4, name: "Aceite Vegetal 1L", price: 2.50, category: "Víveres", icon: "box" },
-            { id: 5, name: "Queso Blanco Duro (kg)", price: 5.50, category: "Charcutería", icon: "shopping-bag" },
-            { id: 6, name: "Refresco 2 Litros", price: 2.00, category: "Bebidas", icon: "cup-soda" }
+            { id: 1, name: "Harina de Maíz PAN 1kg", price: 1.20, category: "Víveres", icon: "box" },
+            { id: 2, name: "Arroz Mary Blanco 1kg", price: 1.10, category: "Víveres", icon: "box" },
+            { id: 3, name: "Aceite Vegetal 1L", price: 2.50, category: "Víveres", icon: "box" },
+            { id: 4, name: "Pasta Plumas 500g", price: 0.95, category: "Víveres", icon: "box" },
+            { id: 5, name: "Queso Blanco Duro (kg)", price: 5.50, category: "Charcutería", icon: "beef" },
+            { id: 6, name: "Jamón de Espalda (kg)", price: 7.20, category: "Charcutería", icon: "beef" },
+            { id: 7, name: "Salchichas Paquete", price: 2.10, category: "Charcutería", icon: "beef" },
+            { id: 8, name: "Refresco 2 Litros", price: 2.00, category: "Bebidas", icon: "cup-soda" },
+            { id: 9, name: "Jugo Natural 1L", price: 1.80, category: "Bebidas", icon: "cup-soda" },
+            { id: 10, name: "Agua Minalba 1.5L", price: 0.80, category: "Bebidas", icon: "droplet" }
         ];
 
+        // Definición de Pestañas de Navegación
+        const tabs = [
+            { id: "Inicio", label: "Inicio", icon: "home", type: "category" },
+            { id: "Víveres", label: "Víveres", icon: "shopping-bag", type: "category" },
+            { id: "Charcutería", label: "Charcutería", icon: "beef", type: "category" },
+            { id: "Bebidas", label: "Bebidas", icon: "cup-soda", type: "category" },
+            { id: "Agua", label: "Agua Potable", icon: "droplet", type: "coming_soon" }
+        ];
+
+        let activeTab = "Inicio";
         let cart = [];
-        let currentCategory = "Todos";
 
         function init() {
-            renderCategories();
-            renderProducts();
+            renderTabs();
+            filterProducts();
             lucide.createIcons();
         }
 
-        function renderCategories() {
-            const categories = ["Todos", ...new Set(products.map(p => p.category))];
-            const container = document.getElementById("categories-container");
-            container.innerHTML = categories.map(cat => `
-                <button onclick="setCategory('${cat}')" class="px-4 py-2 rounded-xl text-sm font-medium transition whitespace-nowrap ${currentCategory === cat ? 'bg-blue-600 text-white shadow-sm' : 'bg-white text-slate-600 border border-slate-200 hover:bg-slate-50'}">
-                    ${cat}
-                </button>
-            `).join("");
+        function renderTabs() {
+            const container = document.getElementById("tabs-container");
+            container.innerHTML = tabs.map(tab => {
+                if (tab.type === "coming_soon") {
+                    return `
+                        <div class="flex items-center gap-2 px-4 py-3 border-b-2 border-transparent text-slate-400 cursor-not-allowed select-none transition opacity-75">
+                            <i data-lucide="${tab.icon}" class="w-4 h-4"></i>
+                            <span class="font-medium text-sm whitespace-nowrap">${tab.label}</span>
+                            <span class="bg-amber-100 text-amber-800 text-[10px] font-bold px-2 py-0.5 rounded-full border border-amber-200 uppercase tracking-wider">
+                                Próximamente
+                            </span>
+                        </div>
+                    `;
+                }
+
+                const isActive = activeTab === tab.id;
+                return `
+                    <button onclick="selectCategory('${tab.id}')" 
+                        class="flex items-center gap-2 px-4 py-3 border-b-2 font-semibold text-sm whitespace-nowrap transition ${
+                            isActive 
+                            ? 'border-blue-600 text-blue-600 bg-blue-50/50 rounded-t-lg' 
+                            : 'border-transparent text-slate-600 hover:text-slate-900 hover:border-slate-300'
+                        }">
+                        <i data-lucide="${tab.icon}" class="w-4 h-4"></i>
+                        ${tab.label}
+                    </button>
+                `;
+            }).join("");
+            lucide.createIcons();
         }
 
-        function setCategory(category) {
-            currentCategory = category;
-            renderCategories();
+        function selectCategory(tabId) {
+            activeTab = tabId;
+            document.getElementById("search-input").value = "";
+            renderTabs();
             filterProducts();
         }
 
-        function renderProducts(items = products) {
+        function filterProducts() {
+            const query = document.getElementById("search-input").value.toLowerCase();
+            const filtered = products.filter(p => {
+                const matchesSearch = p.name.toLowerCase().includes(query);
+                const matchesCategory = activeTab === "Inicio" || p.category === activeTab;
+                return matchesSearch && matchesCategory;
+            });
+            renderProducts(filtered);
+        }
+
+        function renderProducts(items) {
             const grid = document.getElementById("products-grid");
             if (items.length === 0) {
-                grid.innerHTML = `<div class="col-span-full text-center py-12 text-slate-400">No se encontraron productos.</div>`;
+                grid.innerHTML = `
+                    <div class="col-span-full text-center py-12 bg-white rounded-2xl border border-slate-200/80 p-6">
+                        <i data-lucide="package-open" class="w-12 h-12 text-slate-300 mx-auto mb-3"></i>
+                        <p class="text-slate-500 font-medium">No hay productos en esta categoría por el momento.</p>
+                    </div>
+                `;
+                lucide.createIcons();
                 return;
             }
+
             grid.innerHTML = items.map(p => `
                 <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm flex flex-col justify-between hover:shadow-md transition">
                     <div class="flex items-start justify-between mb-4">
@@ -167,16 +222,6 @@
                 </div>
             `).join("");
             lucide.createIcons();
-        }
-
-        function filterProducts() {
-            const query = document.getElementById("search-input").value.toLowerCase();
-            const filtered = products.filter(p => {
-                const matchesSearch = p.name.toLowerCase().includes(query);
-                const matchesCategory = currentCategory === "Todos" || p.category === currentCategory;
-                return matchesSearch && matchesCategory;
-            });
-            renderProducts(filtered);
         }
 
         function addToCart(productId) {
@@ -249,7 +294,7 @@
             const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
             text += `\n*Total a pagar:* $${total.toFixed(2)}`;
 
-            const phone = "584120000000"; // Reemplaza por tu número de teléfono real con código de país
+            const phone = "584120000000"; // Reemplaza por tu número real de WhatsApp
             window.open(`https://wa.me/${phone}?text=${encodeURIComponent(text)}`, "_blank");
         }
 
