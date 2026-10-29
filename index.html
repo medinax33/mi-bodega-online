@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bodega Medina - Víveres & Charcutería</title>
+    <title>Bodega Medina - Víveres, Panadería & Charcutería</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Lucide Icons -->
@@ -47,7 +47,7 @@
                 Calidad y frescura para tu hogar
             </h2>
             <p class="text-blue-100 text-xs sm:text-sm max-w-xl mx-auto">
-                Selecciona tus víveres y charcutería favoritos y envía tu pedido directamente a nuestra caja.
+                Selecciona tus víveres, pan fresco, charcutería y golosinas para enviar tu pedido a nuestra caja.
             </p>
         </div>
     </section>
@@ -113,13 +113,30 @@
     <script>
         // Listado de Productos
         const products = [
+            // Víveres
             { id: 1, name: "Harina de Maíz PAN 1kg", price: 1.20, category: "Víveres", icon: "box" },
             { id: 2, name: "Arroz Mary Blanco 1kg", price: 1.10, category: "Víveres", icon: "box" },
             { id: 3, name: "Aceite Vegetal 1L", price: 2.50, category: "Víveres", icon: "box" },
             { id: 4, name: "Pasta Plumas 500g", price: 0.95, category: "Víveres", icon: "box" },
+            
+            // Panadería
+            { id: 11, name: "Pan Sobado (Bolsa)", price: 1.50, category: "Pan", icon: "sandwich" },
+            { id: 12, name: "Pan Campesino Grande", price: 1.80, category: "Pan", icon: "sandwich" },
+            { id: 13, name: "Pan de Sándwich", price: 2.20, category: "Pan", icon: "sandwich" },
+            { id: 14, name: "Pan Canilla", price: 0.80, category: "Pan", icon: "sandwich" },
+
+            // Charcutería
             { id: 5, name: "Queso Blanco Duro (kg)", price: 5.50, category: "Charcutería", icon: "beef" },
             { id: 6, name: "Jamón de Espalda (kg)", price: 7.20, category: "Charcutería", icon: "beef" },
             { id: 7, name: "Salchichas Paquete", price: 2.10, category: "Charcutería", icon: "beef" },
+
+            // Chucherías
+            { id: 15, name: "Papas Fritas Lay's", price: 1.00, category: "Chucherías", icon: "cookie" },
+            { id: 16, name: "Galletas de Chocolate", price: 0.85, category: "Chucherías", icon: "cookie" },
+            { id: 17, name: "Chocolate de Leche 100g", price: 1.50, category: "Chucherías", icon: "cookie" },
+            { id: 18, name: "Doritos Queso 150g", price: 1.25, category: "Chucherías", icon: "cookie" },
+
+            // Bebidas
             { id: 8, name: "Refresco 2 Litros", price: 2.00, category: "Bebidas", icon: "cup-soda" },
             { id: 9, name: "Jugo Natural 1L", price: 1.80, category: "Bebidas", icon: "cup-soda" },
             { id: 10, name: "Agua Minalba 1.5L", price: 0.80, category: "Bebidas", icon: "droplet" }
@@ -129,7 +146,9 @@
         const tabs = [
             { id: "Inicio", label: "Inicio", icon: "home", type: "category" },
             { id: "Víveres", label: "Víveres", icon: "shopping-bag", type: "category" },
+            { id: "Pan", label: "Pan", icon: "sandwich", type: "category" },
             { id: "Charcutería", label: "Charcutería", icon: "beef", type: "category" },
+            { id: "Chucherías", label: "Chucherías", icon: "cookie", type: "category" },
             { id: "Bebidas", label: "Bebidas", icon: "cup-soda", type: "category" },
             { id: "Agua", label: "Agua Potable", icon: "droplet", type: "coming_soon" }
         ];
