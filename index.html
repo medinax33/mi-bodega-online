@@ -64,8 +64,8 @@
             </nav>
         </div>
 
-        <!-- Search Input -->
-        <div class="relative max-w-md mb-8">
+        <!-- Search Input (Oculto si es sección Próximamente) -->
+        <div id="search-wrapper" class="relative max-w-md mb-8">
             <i data-lucide="search" class="absolute left-3.5 top-3.5 w-5 h-5 text-slate-400"></i>
             <input type="text" id="search-input" oninput="filterProducts()" placeholder="Buscar producto..." 
                 class="w-full pl-10 pr-4 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white shadow-sm text-sm">
@@ -267,11 +267,6 @@
             { id: 12, name: "Pan Campesino Grande", price: 1.80, category: "Pan", icon: "sandwich" },
             { id: 13, name: "Pan de Sándwich", price: 2.20, category: "Pan", icon: "sandwich" },
 
-            // Charcutería
-            { id: 5, name: "Queso Blanco Duro (kg)", price: 5.50, category: "Charcutería", icon: "beef" },
-            { id: 6, name: "Jamón de Espalda (kg)", price: 7.20, category: "Charcutería", icon: "beef" },
-            { id: 7, name: "Salchichas Paquete", price: 2.10, category: "Charcutería", icon: "beef" },
-
             // Chucherías
             { id: 20, name: "Caramelos Freegels", price: 0.50, category: "Chucherías", icon: "cookie" },
             { id: 21, name: "Galletas TAM", price: 0.66, category: "Chucherías", icon: "cookie" },
@@ -294,12 +289,12 @@
             { id: 34, name: "Yesquero / Encendedor", price: 0.25, category: "Hogar", icon: "flame" }
         ];
 
-        // Navegación de Pestañas
+        // Navegación de Pestañas (Charcutería y Agua en Próximamente)
         const tabs = [
             { id: "Inicio", label: "Inicio", icon: "home", type: "category" },
             { id: "Víveres", label: "Víveres", icon: "shopping-bag", type: "category" },
             { id: "Pan", label: "Pan", icon: "sandwich", type: "category" },
-            { id: "Charcutería", label: "Charcutería", icon: "beef", type: "category" },
+            { id: "Charcutería", label: "Charcutería", icon: "beef", type: "coming_soon" },
             { id: "Chucherías", label: "Chucherías", icon: "cookie", type: "category" },
             { id: "Bebidas", label: "Bebidas", icon: "cup-soda", type: "category" },
             { id: "Hogar", label: "Hogar / Varios", icon: "sparkles", type: "category" },
@@ -321,7 +316,7 @@
             container.innerHTML = tabs.map(tab => {
                 if (tab.type === "coming_soon") {
                     return `
-                        <div class="flex items-center gap-2 px-4 py-3 border-b-2 border-transparent text-slate-400 cursor-not-allowed select-none transition opacity-75">
+                        <div onclick="selectCategory('${tab.id}')" class="flex items-center gap-2 px-4 py-3 border-b-2 border-transparent text-slate-400 cursor-pointer select-none transition opacity-80 hover:text-slate-600">
                             <i data-lucide="${tab.icon}" class="w-4 h-4"></i>
                             <span class="font-medium text-sm whitespace-nowrap">${tab.label}</span>
                             <span class="bg-amber-100 text-amber-800 text-[10px] font-bold px-2 py-0.5 rounded-full border border-amber-200 uppercase tracking-wider">
@@ -355,6 +350,26 @@
         }
 
         function filterProducts() {
+            const grid = document.getElementById("products-grid");
+            const searchWrapper = document.getElementById("search-wrapper");
+
+            // Si la pestaña seleccionada es "Próximamente" (Charcutería o Agua)
+            if (activeTab === "Agua" || activeTab === "Charcutería") {
+                searchWrapper.classList.add("hidden");
+                grid.innerHTML = `
+                    <div class="col-span-full text-center py-16 bg-white rounded-2xl border border-slate-200/80 p-8 space-y-3 shadow-sm">
+                        <div class="w-16 h-16 bg-amber-50 text-amber-600 rounded-2xl flex items-center justify-center mx-auto border border-amber-100">
+                            <i data-lucide="clock" class="w-8 h-8"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-slate-900">Sección de ${activeTab} Próximamente</h3>
+                        <p class="text-slate-500 text-sm max-w-md mx-auto">Estamos preparando esta sección con los mejores productos y precios para ti. ¡Muy pronto habilitada!</p>
+                    </div>
+                `;
+                lucide.createIcons();
+                return;
+            }
+
+            searchWrapper.classList.remove("hidden");
             const query = document.getElementById("search-input").value.toLowerCase();
             const filtered = products.filter(p => {
                 const matchesSearch = p.name.toLowerCase().includes(query);
@@ -377,7 +392,6 @@
                 return;
             }
 
-            // Renderizamos las tarjetas con un ID único para asegurar que JavaScript las controle sin errores de borde
             grid.innerHTML = items.map((p, index) => `
                 <div id="product-card-${p.id}-${index}" 
                      class="product-card bg-white p-5 rounded-2xl border border-slate-200 shadow-sm flex flex-col justify-between hover:shadow-md transition cursor-pointer"
@@ -402,10 +416,9 @@
             `).join("");
             
             lucide.createIcons();
-            attachCardEvents(); // Activamos los detectores de eventos robustos
+            attachCardEvents();
         }
 
-        // Sistema de eventos dinámicos por JavaScript nativo (Garantiza cobertura en todas las filas)
         function attachCardEvents() {
             const cards = document.querySelectorAll('.product-card');
             cards.forEach(card => {
