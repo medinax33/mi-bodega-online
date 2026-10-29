@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bodega Santa Rosa medina - Inventario & Pedidos</title>
+    <title>Bodega Medina - Inventario & Pedidos</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Lucide Icons -->
@@ -43,7 +43,7 @@
     <section class="bg-gradient-to-br from-blue-900 via-blue-800 to-teal-800 text-white py-10 px-4">
         <div class="max-w-4xl mx-auto text-center space-y-3">
             <span class="bg-white/10 text-cyan-200 text-xs font-semibold px-3 py-1 rounded-full border border-white/20">
-                Atención rápida por WhatsApp • Tasa BCV Al Día • Delivery & Pick Up • RIF J-35735777-7
+                Atención rápida por WhatsApp • Tasa BCV Automática
             </span>
             <h2 class="text-2xl sm:text-4xl font-extrabold tracking-tight">
                 Calidad y frescura para tu hogar
@@ -57,7 +57,7 @@
     <!-- Main Content -->
     <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex-grow w-full space-y-8">
         
-        <!-- NUEVA SECCIÓN: Guía de Compra Breve e Ilustrada -->
+        <!-- Guía de Compra Breve e Ilustrada -->
         <section class="bg-white rounded-3xl border border-slate-200/80 p-6 sm:p-8 shadow-sm">
             <div class="text-center max-w-xl mx-auto mb-8 space-y-2">
                 <span class="text-xs font-bold text-blue-600 tracking-wider uppercase bg-blue-50 px-3 py-1 rounded-full border border-blue-100">
@@ -133,9 +133,78 @@
         </div>
 
         <!-- Catalog Grid -->
-        <div id="products-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 pb-12">
+        <div id="products-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 pb-6">
             <!-- Dynamic Products -->
         </div>
+
+        <!-- TERCERA SECCIÓN: SOBRE NOSOTROS -->
+        <section class="bg-white rounded-3xl border border-slate-200/80 p-6 sm:p-10 shadow-sm mt-12 space-y-8">
+            <div class="text-center max-w-2xl mx-auto space-y-3">
+                <span class="text-xs font-bold text-blue-600 tracking-wider uppercase bg-blue-50 px-3 py-1 rounded-full border border-blue-100">
+                    Nuestra Esencia
+                </span>
+                <h3 class="text-2xl sm:text-3xl font-extrabold text-slate-900">Sobre Nosotros - Bodega Medina</h3>
+                <p class="text-sm text-slate-600 leading-relaxed">
+                    Con esfuerzo, unión familiar y mucho amor por nuestra gente, estamos empezando este hermoso proyecto en nuestra querida Venezuela. Sabemos que el camino se construye paso a paso, con humildad y trabajo honrado. Confiamos de corazón en recibir tu apoyo para seguir creciendo y convertirnos en el punto de confianza de cada vecino.
+                </p>
+            </div>
+
+            <!-- Galería de imágenes del local / ambiente -->
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                <div class="relative rounded-2xl overflow-hidden shadow-sm border border-slate-200 h-48 group">
+                    <img src="https://images.unsplash.com/photo-1604719312566-8912e9227c6a?auto=format&fit=crop&w=600&q=80" alt="Estantes de la bodega" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                    <div class="absolute inset-0 bg-gradient-to-t from-slate-900/70 via-transparent flex items-end p-4">
+                        <span class="text-white text-xs font-medium">Surtido fresco y cercano</span>
+                    </div>
+                </div>
+                <div class="relative rounded-2xl overflow-hidden shadow-sm border border-slate-200 h-48 group">
+                    <img src="https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&w=600&q=80" alt="Atención al cliente" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                    <div class="absolute inset-0 bg-gradient-to-t from-slate-900/70 via-transparent flex items-end p-4">
+                        <span class="text-white text-xs font-medium">Atención con calidez venezolana</span>
+                    </div>
+                </div>
+                <div class="relative rounded-2xl overflow-hidden shadow-sm border border-slate-200 h-48 group">
+                    <img src="https://images.unsplash.com/photo-1578916171728-46686eac8d58?auto=format&fit=crop&w=600&q=80" alt="Víveres y productos" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                    <div class="absolute inset-0 bg-gradient-to-t from-slate-900/70 via-transparent flex items-end p-4">
+                        <span class="text-white text-xs font-medium">Lo que necesitas para el hogar</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Datos básicos de contacto, redes y mensaje motivador -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 pt-4 border-t border-slate-100">
+                <div class="space-y-4">
+                    <h4 class="font-bold text-slate-900 flex items-center gap-2">
+                        <i data-lucide="map-pin" class="w-5 h-5 text-blue-600"></i> Datos de Contacto
+                    </h4>
+                    <ul class="space-y-2 text-sm text-slate-600">
+                        <li class="flex items-center gap-2">
+                            <i data-lucide="phone" class="w-4 h-4 text-slate-400"></i>
+                            <span>Teléfono / WhatsApp: <strong class="text-slate-900">+58 412-0000000</strong></span>
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <i data-lucide="instagram" class="w-4 h-4 text-slate-400"></i>
+                            <span>Instagram: <strong class="text-slate-900">@BodegaMedinaVe</strong></span>
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <i data-lucide="clock" class="w-4 h-4 text-slate-400"></i>
+                            <span>Horario: Lunes a Sábado de 8:00 AM a 8:00 PM</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="bg-blue-50/70 border border-blue-100 rounded-2xl p-5 flex flex-col justify-center space-y-2">
+                    <div class="flex items-center gap-2 text-blue-800 font-bold text-sm">
+                        <i data-lucide="heart" class="w-4 h-4 text-rose-500 fill-rose-500"></i>
+                        <span>Impulsando la vieja Venezuela</span>
+                    </div>
+                    <p class="text-xs text-blue-900/80 leading-relaxed">
+                        "Creemos en nuestra tierra, en el esfuerzo diario y en la nobleza de nuestra gente. Gracias por visitarnos y por apoyar este emprendimiento familiar que crece con ilusión y humildad."
+                    </p>
+                </div>
+            </div>
+        </section>
+
     </main>
 
     <!-- Cart Drawer & Multi-Step Checkout Modal -->
@@ -328,18 +397,18 @@
             { id: 12, name: "Pan Campesino Grande", price: 1.80, category: "Pan", icon: "sandwich" },
             { id: 13, name: "Pan de Sándwich", price: 2.20, category: "Pan", icon: "sandwich" },
 
-            // Bebidas & Snacks (Unidos)
-            { id: 20, name: "Caramelos Freegels", price: 0.50, category: "Bebidas & Snacks", icon: "cookie" },
-            { id: 21, name: "Galletas TAM", price: 0.66, category: "Bebidas & Snacks", icon: "cookie" },
-            { id: 22, name: "Caramelos de Menta", price: 0.05, category: "Bebidas & Snacks", icon: "cookie" },
-            { id: 23, name: "Caramelos Chaos Mora", price: 0.06, category: "Bebidas & Snacks", icon: "cookie" },
-            { id: 24, name: "Chupetas", price: 0.25, category: "Bebidas & Snacks", icon: "cookie" },
-            { id: 15, name: "Papas Fritas Lay's", price: 1.00, category: "Bebidas & Snacks", icon: "cookie" },
-            { id: 25, name: "Refresco Coca-Cola 355ml", price: 0.70, category: "Bebidas & Snacks", icon: "cup-soda" },
-            { id: 26, name: "Refresco de Litro 1L", price: 1.10, category: "Bebidas & Snacks", icon: "cup-soda" },
-            { id: 27, name: "Refresco Botella 1.25L", price: 1.00, category: "Bebidas & Snacks", icon: "cup-soda" },
-            { id: 28, name: "Refresco 1.5L", price: 1.40, category: "Bebidas & Snacks", icon: "cup-soda" },
-            { id: 29, name: "Refresco 2L", price: 1.80, category: "Bebidas & Snacks", icon: "cup-soda" },
+            // Bebibas / Snacks (Unidos)
+            { id: 20, name: "Caramelos Freegels", price: 0.50, category: "Bebibas / Snacks", icon: "cookie" },
+            { id: 21, name: "Galletas TAM", price: 0.66, category: "Bebibas / Snacks", icon: "cookie" },
+            { id: 22, name: "Caramelos de Menta", price: 0.05, category: "Bebibas / Snacks", icon: "cookie" },
+            { id: 23, name: "Caramelos Chaos Mora", price: 0.06, category: "Bebidas / Snacks", icon: "cookie" },
+            { id: 24, name: "Chupetas", price: 0.25, category: "Bebidas / Snacks", icon: "cookie" },
+            { id: 15, name: "Papas Fritas Lay's", price: 1.00, category: "Bebidas / Snacks", icon: "cookie" },
+            { id: 25, name: "Coca-Cola 355ml", price: 0.70, category: "Bebidas / Snacks", icon: "cup-soda" },
+            { id: 26, name: "Coca-Cola de Litro 1L", price: 1.10, category: "Bebidas / Snacks", icon: "cup-soda" },
+            { id: 27, name: "Coca-Cola Botella 1.25L", price: 1.00, category: "Bebidas / Snacks", icon: "cup-soda" },
+            { id: 28, name: "Coca-Cola 1.5L", price: 1.40, category: "Bebidas / Snacks", icon: "cup-soda" },
+            { id: 29, name: "Coca-Cola 2L", price: 1.80, category: "Bebidas / Snacks", icon: "cup-soda" },
 
             // Hogar / Varios
             { id: 30, name: "Toallines Alisoft", price: 0.90, category: "Hogar", icon: "home" },
@@ -355,7 +424,7 @@
             { id: "Víveres", label: "Víveres", icon: "shopping-bag", type: "category" },
             { id: "Pan", label: "Pan", icon: "sandwich", type: "category" },
             { id: "Charcutería", label: "Charcutería", icon: "beef", type: "coming_soon" },
-            { id: "Bebidas & Snacks", label: "Bebidas & Snacks", icon: "cup-soda", type: "category" },
+            { id: "Bebibas / Snacks", label: "Bebibas / Snacks", icon: "cup-soda", type: "category" },
             { id: "Hogar", label: "Hogar / Varios", icon: "sparkles", type: "category" },
             { id: "Agua", label: "Agua Potable", icon: "droplet", type: "coming_soon" }
         ];
