@@ -49,7 +49,7 @@
                 Calidad y frescura para tu hogar
             </h2>
             <p class="text-blue-100 text-xs sm:text-sm max-w-xl mx-auto">
-                Coloca el cursor sobre cualquier precio para ver su equivalente actualizado al día en Bolívares.
+                Coloca el cursor sobre cualquier producto para ver su precio actualizado en Bolívares.
             </p>
         </div>
     </section>
@@ -309,7 +309,6 @@
         let activeTab = "Inicio";
         let cart = [];
 
-        // Inicialización asíncrona para buscar la tasa primero
         async function init() {
             await cargarTasaBCVEnVivo();
             renderTabs();
@@ -379,22 +378,22 @@
             }
 
             grid.innerHTML = items.map(p => `
-                <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm flex flex-col justify-between hover:shadow-md transition">
-                    <div class="flex items-start justify-between mb-4">
-                        <div class="p-3 bg-blue-50 text-blue-600 rounded-xl">
-                            <i data-lucide="${p.icon}" class="w-6 h-6"></i>
-                        </div>
-                        <span class="text-xs font-semibold px-2.5 py-1 bg-slate-100 text-slate-600 rounded-lg">${p.category}</span>
-                    </div>
+                <!-- El evento hover ahora cubre toda la tarjeta del producto para mayor comodidad -->
+                <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm flex flex-col justify-between hover:shadow-md transition group/card"
+                     data-usd="${p.price}"
+                     onmouseenter="showBolivares(this)"
+                     onmouseleave="showDolares(this)">
                     <div>
+                        <div class="flex items-start justify-between mb-4">
+                            <div class="p-3 bg-blue-50 text-blue-600 rounded-xl">
+                                <i data-lucide="${p.icon}" class="w-6 h-6"></i>
+                            </div>
+                            <span class="text-xs font-semibold px-2.5 py-1 bg-slate-100 text-slate-600 rounded-lg">${p.category}</span>
+                        </div>
                         <h3 class="font-semibold text-slate-900">${p.name}</h3>
-                        <!-- Contenedor de precio con efecto hover dinámico -->
-                        <div class="price-container mt-1 cursor-pointer select-none inline-block group" 
-                             data-usd="${p.price}" 
-                             onmouseenter="showBolivares(this)" 
-                             onmouseleave="showDolares(this)">
+                        <div class="mt-1 select-none inline-block">
                             <p class="text-lg font-bold text-blue-600 price-text transition-colors">$${p.price.toFixed(2)}</p>
-                            <span class="text-[10px] text-slate-400 block -mt-1 font-medium group-hover:text-emerald-600 transition-colors">Tasa BCV en vivo (Pasa el cursor)</span>
+                            <span class="text-[10px] text-slate-400 block -mt-1 font-medium group-hover/card:text-emerald-600 transition-colors">Tasa BCV (Pasa el cursor)</span>
                         </div>
                     </div>
                     <button onclick="addToCart(${p.id})" class="mt-4 w-full bg-slate-900 hover:bg-slate-800 text-white font-medium py-2.5 rounded-xl transition flex items-center justify-center gap-2 text-sm">
@@ -405,12 +404,12 @@
             lucide.createIcons();
         }
 
-        // Funciones para calcular la conversión al pasar el cursor usando la tasa en vivo
-        function showBolivares(element) {
-            const usdPrice = parseFloat(element.getAttribute("data-usd"));
+        // Funciones actualizadas para manejar la tarjeta completa
+        function showBolivares(cardElement) {
+            const usdPrice = parseFloat(cardElement.getAttribute("data-usd"));
             const bsPrice = usdPrice * TASA_BCV;
-            const textElement = element.querySelector(".price-text");
-            const subText = element.querySelector("span");
+            const textElement = cardElement.querySelector(".price-text");
+            const subText = cardElement.querySelector("span");
             
             textElement.innerHTML = `${bsPrice.toLocaleString('es-VE', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} Bs`;
             textElement.classList.remove("text-blue-600");
@@ -418,15 +417,15 @@
             subText.innerText = "Tasa BCV oficial en vivo";
         }
 
-        function showDolares(element) {
-            const usdPrice = parseFloat(element.getAttribute("data-usd"));
-            const textElement = element.querySelector(".price-text");
-            const subText = element.querySelector("span");
+        function showDolares(cardElement) {
+            const usdPrice = parseFloat(cardElement.getAttribute("data-usd"));
+            const textElement = cardElement.querySelector(".price-text");
+            const subText = cardElement.querySelector("span");
             
             textElement.innerHTML = `$${usdPrice.toFixed(2)}`;
             textElement.classList.remove("text-emerald-600");
             textElement.classList.add("text-blue-600");
-            subText.innerText = "Tasa BCV en vivo (Pasa el cursor)";
+            subText.innerText = "Tasa BCV (Pasa el cursor)";
         }
 
         function addToCart(productId) {
@@ -463,7 +462,7 @@
             } else {
                 btnProceed.disabled = false;
                 container.innerHTML = cart.map(item => `
-                    <div class="flex items-center justify-between bg-slate-50 p-3.5 rounded-2xl border border-slate-200/80">
+                    <div class="flex items-center justify-between bg-slate-50 p-3.5 rounded-2xl border border-slate-200/85">
                         <div class="flex-1 pr-3">
                             <p class="font-semibold text-slate-900 text-sm leading-tight">${item.name}</p>
                             <p class="text-xs text-blue-600 font-semibold mt-0.5">$${item.price.toFixed(2)} c/u</p>
