@@ -64,7 +64,7 @@
             </nav>
         </div>
 
-        <!-- Search Input (Oculto si es sección Próximamente) -->
+        <!-- Search Input -->
         <div id="search-wrapper" class="relative max-w-md mb-8">
             <i data-lucide="search" class="absolute left-3.5 top-3.5 w-5 h-5 text-slate-400"></i>
             <input type="text" id="search-input" oninput="filterProducts()" placeholder="Buscar producto..." 
@@ -267,19 +267,18 @@
             { id: 12, name: "Pan Campesino Grande", price: 1.80, category: "Pan", icon: "sandwich" },
             { id: 13, name: "Pan de Sándwich", price: 2.20, category: "Pan", icon: "sandwich" },
 
-            // Chucherías
-            { id: 20, name: "Caramelos Freegels", price: 0.50, category: "Chucherías", icon: "cookie" },
-            { id: 21, name: "Galletas TAM", price: 0.66, category: "Chucherías", icon: "cookie" },
-            { id: 22, name: "Caramelos de Menta", price: 0.05, category: "Chucherías", icon: "cookie" },
-            { id: 23, name: "Caramelos Chaos Mora", price: 0.06, category: "Chucherías", icon: "cookie" },
-            { id: 24, name: "Chupetas", price: 0.25, category: "Chucherías", icon: "cookie" },
-
-            // Bebidas
-            { id: 25, name: "Refresco Coca-Cola 355ml", price: 0.70, category: "Bebidas", icon: "cup-soda" },
-            { id: 26, name: "Refresco de Litro 1L", price: 1.10, category: "Bebidas", icon: "cup-soda" },
-            { id: 27, name: "Refresco Botella 1.25L", price: 1.00, category: "Bebidas", icon: "cup-soda" },
-            { id: 28, name: "Refresco 1.5L", price: 1.40, category: "Bebidas", icon: "cup-soda" },
-            { id: 29, name: "Refresco 2L", price: 1.80, category: "Bebidas", icon: "cup-soda" },
+            // Bebidas & Snacks (Unidos)
+            { id: 20, name: "Caramelos Freegels", price: 0.50, category: "Bebidas & Snacks", icon: "cookie" },
+            { id: 21, name: "Galletas TAM", price: 0.66, category: "Bebidas & Snacks", icon: "cookie" },
+            { id: 22, name: "Caramelos de Menta", price: 0.05, category: "Bebidas & Snacks", icon: "cookie" },
+            { id: 23, name: "Caramelos Chaos Mora", price: 0.06, category: "Bebidas & Snacks", icon: "cookie" },
+            { id: 24, name: "Chupetas", price: 0.25, category: "Bebidas & Snacks", icon: "cookie" },
+            { id: 15, name: "Papas Fritas Lay's", price: 1.00, category: "Bebidas & Snacks", icon: "cookie" },
+            { id: 25, name: "Refresco Coca-Cola 355ml", price: 0.70, category: "Bebidas & Snacks", icon: "cup-soda" },
+            { id: 26, name: "Refresco de Litro 1L", price: 1.10, category: "Bebidas & Snacks", icon: "cup-soda" },
+            { id: 27, name: "Refresco Botella 1.25L", price: 1.00, category: "Bebidas & Snacks", icon: "cup-soda" },
+            { id: 28, name: "Refresco 1.5L", price: 1.40, category: "Bebidas & Snacks", icon: "cup-soda" },
+            { id: 29, name: "Refresco 2L", price: 1.80, category: "Bebidas & Snacks", icon: "cup-soda" },
 
             // Hogar / Varios
             { id: 30, name: "Toallines Alisoft", price: 0.90, category: "Hogar", icon: "home" },
@@ -289,14 +288,13 @@
             { id: 34, name: "Yesquero / Encendedor", price: 0.25, category: "Hogar", icon: "flame" }
         ];
 
-        // Navegación de Pestañas (Charcutería y Agua en Próximamente)
+        // Navegación de Pestañas (Bebidas & Snacks integrada, Charcutería y Agua en Próximamente)
         const tabs = [
             { id: "Inicio", label: "Inicio", icon: "home", type: "category" },
             { id: "Víveres", label: "Víveres", icon: "shopping-bag", type: "category" },
             { id: "Pan", label: "Pan", icon: "sandwich", type: "category" },
             { id: "Charcutería", label: "Charcutería", icon: "beef", type: "coming_soon" },
-            { id: "Chucherías", label: "Chucherías", icon: "cookie", type: "category" },
-            { id: "Bebidas", label: "Bebidas", icon: "cup-soda", type: "category" },
+            { id: "Bebidas & Snacks", label: "Bebidas & Snacks", icon: "cup-soda", type: "category" },
             { id: "Hogar", label: "Hogar / Varios", icon: "sparkles", type: "category" },
             { id: "Agua", label: "Agua Potable", icon: "droplet", type: "coming_soon" }
         ];
@@ -353,7 +351,6 @@
             const grid = document.getElementById("products-grid");
             const searchWrapper = document.getElementById("search-wrapper");
 
-            // Si la pestaña seleccionada es "Próximamente" (Charcutería o Agua)
             if (activeTab === "Agua" || activeTab === "Charcutería") {
                 searchWrapper.classList.add("hidden");
                 grid.innerHTML = `
