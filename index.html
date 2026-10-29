@@ -1,581 +1,259 @@
 <!DOCTYPE html>
-<html lang="es" class="scroll-smooth">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bodega Medina - Víveres & Agua Purificada</title>
+    <title>Bodega Medina - Víveres y Agua Potable</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        brand: {
-                            50: '#f0fdfa',
-                            100: '#ccfbf1',
-                            500: '#14b8a6',
-                            600: '#0d9488',
-                            700: '#0f766e',
-                        },
-                        aqua: {
-                            50: '#f0f9ff',
-                            100: '#e0f2fe',
-                            500: '#0ea5e9',
-                            600: '#0284c7',
-                            700: '#0369a1',
-                        }
-                    },
-                    fontFamily: {
-                        sans: ['Inter', 'sans-serif'],
-                    }
-                }
-            }
-        }
-    </script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
         body { font-family: 'Inter', sans-serif; }
-        .no-scrollbar::-webkit-scrollbar { display: none; }
-        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
     </style>
 </head>
-<body class="bg-slate-50 text-slate-800 antialiased flex flex-col min-h-screen relative">
+<body class="bg-slate-50 text-slate-800 flex flex-col min-h-screen">
 
-    <!-- HEADER / NAVBAR -->
-    <header class="sticky top-0 z-40 bg-white/90 backdrop-blur-md shadow-sm border-b border-slate-100">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between items-center h-20">
-                
-                <!-- LOGO BODEGA MEDINA -->
-                <a href="#" class="flex items-center gap-3 group">
-                    <div class="w-12 h-12 rounded-2xl bg-gradient-to-tr from-brand-600 via-aqua-500 to-teal-400 flex items-center justify-center text-white shadow-lg shadow-teal-500/20 transition-transform group-hover:scale-105">
-                        <i data-lucide="store" class="w-6 h-6"></i>
-                    </div>
-                    <div>
-                        <span class="text-xl font-black tracking-tight text-slate-900 block leading-none">Bodega <span class="text-brand-600">Medina</span></span>
-                        <span class="text-xs text-slate-500 font-medium tracking-wider">Víveres & Agua Purificada</span>
-                    </div>
-                </a>
-
-                <!-- NAVEGACIÓN DESKTOP -->
-                <nav class="hidden md:flex items-center gap-8 font-medium text-slate-600 text-sm">
-                    <a href="#inicio" class="hover:text-brand-600 transition-colors">Inicio</a>
-                    <a href="#catalogo" class="hover:text-brand-600 transition-colors">Productos</a>
-                    <a href="#agua" class="hover:text-aqua-600 transition-colors flex items-center gap-1.5 font-semibold text-aqua-600 bg-aqua-50 px-3 py-1.5 rounded-full border border-aqua-100">
-                        <i data-lucide="droplet" class="w-4 h-4"></i> Recarga de Agua
-                    </a>
-                    <a href="#contacto" class="hover:text-brand-600 transition-colors">Contacto</a>
-                </nav>
-
-                <!-- ACCIONES Y CARRITO -->
-                <div class="flex items-center gap-3">
-                    <a href="https://wa.me/584120000000?text=Hola%20Bodega%20Medina,%20quisiera%20consultar%20sobre..." target="_blank" rel="noopener noreferrer" class="hidden sm:flex items-center gap-2 px-4 py-2 bg-emerald-50 text-emerald-700 border border-emerald-200 rounded-xl hover:bg-emerald-100 transition-colors text-sm font-semibold">
-                        <i data-lucide="message-circle" class="w-4 h-4 text-emerald-600"></i>
-                        <span>WhatsApp</span>
-                    </a>
-
-                    <button onclick="toggleCart()" class="relative p-2.5 bg-brand-600 hover:bg-brand-700 text-white rounded-xl transition-all flex items-center gap-2 shadow-md shadow-brand-600/20">
-                        <i data-lucide="shopping-bag" class="w-5 h-5"></i>
-                        <span class="hidden sm:inline text-sm font-semibold">Mi Orden</span>
-                        <span id="cart-badge" class="absolute -top-1.5 -right-1.5 bg-amber-500 text-white text-xs font-bold w-5 h-5 rounded-full flex items-center justify-center shadow-sm">0</span>
-                    </button>
+    <!-- Header Navigation -->
+    <header class="sticky top-0 z-40 bg-white/95 backdrop-blur border-b border-slate-200 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-xl bg-blue-600 flex items-center justify-center text-white font-bold text-xl shadow-md">
+                    M
                 </div>
-
+                <div>
+                    <h1 class="font-bold text-lg leading-none text-slate-900">Bodega Medina</h1>
+                    <span class="text-xs text-emerald-600 font-medium flex items-center gap-1 mt-0.5">
+                        <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span> Abierto
+                    </span>
+                </div>
             </div>
+
+            <button onclick="toggleCart()" class="relative p-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 transition text-slate-700">
+                <i data-lucide="shopping-cart" class="w-5 h-5"></i>
+                <span id="cart-badge" class="hidden absolute -top-1 -right-1 bg-blue-600 text-white text-xs font-bold w-5 h-5 rounded-full flex items-center justify-center">0</span>
+            </button>
         </div>
     </header>
 
-    <!-- HERO PRINCIPAL -->
-    <section id="inicio" class="relative overflow-hidden bg-gradient-to-b from-teal-50/60 via-slate-50 to-slate-50 py-16 lg:py-24 border-b border-slate-100">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-            <div class="grid lg:grid-cols-2 gap-12 items-center">
-                
-                <div class="space-y-6 text-center lg:text-left">
-                    <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-teal-100/80 text-teal-800 border border-teal-200 text-xs sm:text-sm font-semibold">
-                        <i data-lucide="sparkles" class="w-4 h-4 text-brand-600"></i>
-                        <span>Calidad, Frescura y Atención Familiar</span>
-                    </div>
-
-                    <h1 class="text-3xl sm:text-5xl font-extrabold text-slate-900 tracking-tight leading-tight">
-                        Tus víveres diarios y <span class="text-transparent bg-clip-text bg-gradient-to-r from-aqua-600 to-brand-600">Agua 100% Purificada</span>
-                    </h1>
-
-                    <p class="text-slate-600 text-base sm:text-lg max-w-xl mx-auto lg:mx-0">
-                        Encuentra todos tus víveres esenciales, bebidas frías, víveres de primera necesidad y recarga de agua potable tratada con los mejores estándares.
-                    </p>
-
-                    <div class="flex flex-col sm:flex-row gap-3 justify-center lg:justify-start pt-2">
-                        <a href="#catalogo" class="px-6 py-3.5 bg-brand-600 hover:bg-brand-700 text-white font-bold rounded-xl shadow-lg shadow-brand-600/30 transition-all flex items-center justify-center gap-2">
-                            <i data-lucide="shopping-cart" class="w-5 h-5"></i>
-                            Explorar Productos
-                        </a>
-                        <a href="#agua" class="px-6 py-3.5 bg-white hover:bg-slate-100 text-slate-700 font-semibold rounded-xl border border-slate-200 transition-all shadow-sm flex items-center justify-center gap-2">
-                            <i data-lucide="droplet" class="w-5 h-5 text-aqua-600"></i>
-                            Estación de Agua
-                        </a>
-                    </div>
-                </div>
-
-                <!-- CARDS DESTACADAS -->
-                <div class="relative flex justify-center">
-                    <div class="w-full max-w-md bg-white p-6 rounded-3xl shadow-xl border border-slate-100 space-y-4">
-                        
-                        <div class="flex items-center gap-4 bg-aqua-50/80 p-4 rounded-2xl border border-aqua-100">
-                            <div class="w-12 h-12 bg-aqua-500 rounded-xl flex items-center justify-center text-white shrink-0 shadow-md">
-                                <i data-lucide="droplet" class="w-6 h-6"></i>
-                            </div>
-                            <div>
-                                <h4 class="font-bold text-slate-900 text-sm">Recarga de Agua Potable</h4>
-                                <p class="text-xs text-slate-600">Triple filtrado + desinfección UV / Ozono</p>
-                                <span class="text-aqua-700 font-bold text-sm block mt-1">$1.50 / Botellón 20L</span>
-                            </div>
-                        </div>
-
-                        <div class="flex items-center gap-4 bg-teal-50/80 p-4 rounded-2xl border border-teal-100">
-                            <div class="w-12 h-12 bg-brand-600 rounded-xl flex items-center justify-center text-white shrink-0 shadow-md">
-                                <i data-lucide="shopping-basket" class="w-6 h-6"></i>
-                            </div>
-                            <div>
-                                <h4 class="font-bold text-slate-900 text-sm">Abarrotes & Víveres</h4>
-                                <p class="text-xs text-slate-600">Productos de marcas de confianza</p>
-                                <span class="text-brand-700 font-bold text-sm block mt-1">Precios Justos Todos los Días</span>
-                            </div>
-                        </div>
-
-                        <div class="bg-slate-900 text-white p-4 rounded-2xl flex items-center justify-between shadow-md">
-                            <div>
-                                <p class="text-xs text-slate-400">¿Deseas pedir desde casa?</p>
-                                <p class="text-sm font-bold">Haz tu pedido rápido por WhatsApp</p>
-                            </div>
-                            <a href="#catalogo" class="p-2 bg-brand-500 hover:bg-brand-600 rounded-xl transition-colors text-white">
-                                <i data-lucide="arrow-right" class="w-5 h-5"></i>
-                            </a>
-                        </div>
-
-                    </div>
-                </div>
-
-            </div>
+    <!-- Hero Banner -->
+    <section class="bg-gradient-to-br from-blue-900 via-blue-800 to-teal-800 text-white py-12 px-4">
+        <div class="max-w-4xl mx-auto text-center space-y-4">
+            <span class="bg-white/10 text-cyan-200 text-xs font-semibold px-3 py-1 rounded-full border border-white/20">
+                Atención rápida por WhatsApp
+            </span>
+            <h2 class="text-3xl sm:text-5xl font-extrabold tracking-tight">
+                Calidad y frescura cerca de ti
+            </h2>
+            <p class="text-blue-100 text-sm sm:text-base max-w-xl mx-auto">
+                Víveres generales, charcutería y recarga de agua potable purificada en Bodega Medina.
+            </p>
         </div>
     </section>
 
-    <!-- SECCIÓN RECARGA DE AGUA -->
-    <section id="agua" class="py-16 bg-gradient-to-br from-sky-50 via-teal-50 to-white border-b border-slate-200">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center max-w-3xl mx-auto space-y-4">
-                <span class="px-3 py-1 bg-aqua-100 text-aqua-700 border border-aqua-200 rounded-full text-xs font-bold uppercase tracking-wider">Agua Purificada</span>
-                <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900">Estación de Llenado de Agua Potable</h2>
-                <p class="text-slate-600 text-base">Agua fresca, baja en sodio, tratada con sistema de microfiltración, carbón activado, ósmosis inversa y lámpara germicida UV.</p>
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex-grow w-full">
+        <!-- Search & Filter Controls -->
+        <div class="flex flex-col md:flex-row gap-4 mb-8">
+            <div class="relative flex-1">
+                <i data-lucide="search" class="absolute left-3.5 top-3.5 w-5 h-5 text-slate-400"></i>
+                <input type="text" id="search-input" oninput="filterProducts()" placeholder="Buscar producto..." 
+                    class="w-full pl-10 pr-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white shadow-sm text-sm">
             </div>
-
-            <!-- TARIFAS DE AGUA -->
-            <div class="grid md:grid-cols-3 gap-6 mt-12">
-                <div class="bg-white border border-slate-200 hover:border-aqua-500 rounded-2xl p-6 transition-all shadow-sm hover:shadow-md flex flex-col justify-between">
-                    <div>
-                        <span class="bg-aqua-100 text-aqua-800 text-xs font-bold px-2.5 py-1 rounded-full">Más Popular</span>
-                        <h4 class="font-bold text-slate-900 text-lg mt-3">Recarga Botellón 20 Litros</h4>
-                        <p class="text-slate-500 text-xs mt-1">Llenado higiénico para botellón tradicional.</p>
-                        <p class="text-3xl font-black text-aqua-600 mt-4">$1.50</p>
-                    </div>
-                    <button onclick="addToCart(1, 'Recarga Botellón 20L', 1.50, 'agua')" class="mt-6 w-full py-2.5 bg-aqua-600 hover:bg-aqua-700 text-white rounded-xl font-bold text-sm transition-colors flex items-center justify-center gap-2">
-                        <i data-lucide="plus" class="w-4 h-4"></i> Añadir a la Orden
-                    </button>
-                </div>
-
-                <div class="bg-white border border-slate-200 hover:border-aqua-500 rounded-2xl p-6 transition-all shadow-sm hover:shadow-md flex flex-col justify-between">
-                    <div>
-                        <span class="bg-slate-100 text-slate-700 text-xs font-bold px-2.5 py-1 rounded-full">Garrafón</span>
-                        <h4 class="font-bold text-slate-900 text-lg mt-3">Recarga Garrafón 10 Litros</h4>
-                        <p class="text-slate-500 text-xs mt-1">Ideal para viajes, oficinas o mesas.</p>
-                        <p class="text-3xl font-black text-aqua-600 mt-4">$1.00</p>
-                    </div>
-                    <button onclick="addToCart(2, 'Recarga Garrafón 10L', 1.00, 'agua')" class="mt-6 w-full py-2.5 bg-aqua-600 hover:bg-aqua-700 text-white rounded-xl font-bold text-sm transition-colors flex items-center justify-center gap-2">
-                        <i data-lucide="plus" class="w-4 h-4"></i> Añadir a la Orden
-                    </button>
-                </div>
-
-                <div class="bg-white border border-slate-200 hover:border-brand-500 rounded-2xl p-6 transition-all shadow-sm hover:shadow-md flex flex-col justify-between">
-                    <div>
-                        <span class="bg-teal-100 text-teal-800 text-xs font-bold px-2.5 py-1 rounded-full">Combo Completo</span>
-                        <h4 class="font-bold text-slate-900 text-lg mt-3">Botellón Nuevo + Primera Recarga</h4>
-                        <p class="text-slate-500 text-xs mt-1">Botellón PET virgen libre de BPA con asa lateral.</p>
-                        <p class="text-3xl font-black text-brand-600 mt-4">$12.00</p>
-                    </div>
-                    <button onclick="addToCart(3, 'Botellón Nuevo 20L + Llenado', 12.00, 'agua')" class="mt-6 w-full py-2.5 bg-brand-600 hover:bg-brand-700 text-white rounded-xl font-bold text-sm transition-colors flex items-center justify-center gap-2">
-                        <i data-lucide="plus" class="w-4 h-4"></i> Añadir a la Orden
-                    </button>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- CATALOGO DE PRODUCTOS -->
-    <section id="catalogo" class="py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex-1">
-        <div class="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-4">
-            <div>
-                <span class="text-brand-600 font-bold text-sm tracking-widest uppercase">Inventario Disponible</span>
-                <h2 class="text-3xl font-extrabold text-slate-900">Catálogo de Productos</h2>
-            </div>
-
-            <!-- BUSCADOR EN TIEMPO REAL -->
-            <div class="relative w-full md:w-80">
-                <i data-lucide="search" class="w-5 h-5 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2"></i>
-                <input type="text" id="search-input" oninput="filterProducts()" placeholder="Buscar producto..." class="w-full pl-11 pr-4 py-2.5 bg-white border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-brand-500 text-slate-800 text-sm shadow-sm">
+            <div class="flex gap-2 overflow-x-auto pb-2 md:pb-0 scrollbar-none" id="categories-container">
+                <!-- Dynamic Category Buttons -->
             </div>
         </div>
 
-        <!-- FILTROS DE CATEGORÍA -->
-        <div class="flex items-center gap-2 overflow-x-auto pb-4 mb-6 no-scrollbar" id="category-filters">
-            <button onclick="setCategory('all', this)" class="category-btn active px-4 py-2 rounded-xl text-sm font-bold whitespace-nowrap transition-all bg-brand-600 text-white shadow-sm">
-                Todos
-            </button>
-            <button onclick="setCategory('viveres', this)" class="category-btn px-4 py-2 rounded-xl text-sm font-semibold whitespace-nowrap transition-all bg-white border border-slate-200 text-slate-600 hover:bg-slate-100">
-                🌾 Víveres
-            </button>
-            <button onclick="setCategory('agua', this)" class="category-btn px-4 py-2 rounded-xl text-sm font-semibold whitespace-nowrap transition-all bg-white border border-slate-200 text-slate-600 hover:bg-slate-100">
-                💧 Recarga de Agua
-            </button>
-            <button onclick="setCategory('bebidas', this)" class="category-btn px-4 py-2 rounded-xl text-sm font-semibold whitespace-nowrap transition-all bg-white border border-slate-200 text-slate-600 hover:bg-slate-100">
-                🥤 Bebidas y Snacks
-            </button>
-            <button onclick="setCategory('hogar', this)" class="category-btn px-4 py-2 rounded-xl text-sm font-semibold whitespace-nowrap transition-all bg-white border border-slate-200 text-slate-600 hover:bg-slate-100">
-                🧹 Limpieza y Hogar
-            </button>
+        <!-- Catalog Grid -->
+        <div id="products-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            <!-- Dynamic Product Cards -->
         </div>
+    </main>
 
-        <!-- GRID DE PRODUCTOS -->
-        <div id="products-grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-            <!-- Los productos se inyectan dinámicamente -->
-        </div>
-
-        <!-- MENSAJE DE RESULTADOS VACÍOS -->
-        <div id="no-results" class="hidden text-center py-16">
-            <i data-lucide="package-search" class="w-12 h-12 text-slate-300 mx-auto mb-3"></i>
-            <p class="text-slate-500 font-medium">No encontramos ningún producto con esa descripción.</p>
-        </div>
-    </section>
-
-    <!-- CONTACTO Y UBICACIÓN -->
-    <section id="contacto" class="bg-slate-900 text-white py-16 border-t border-slate-800">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid md:grid-cols-3 gap-8">
-                
-                <div class="space-y-3">
-                    <div class="w-10 h-10 bg-slate-800 rounded-xl flex items-center justify-center text-brand-400">
-                        <i data-lucide="map-pin" class="w-5 h-5"></i>
-                    </div>
-                    <h3 class="font-bold text-white text-lg">Dirección</h3>
-                    <p class="text-slate-400 text-sm leading-relaxed">
-                        Calle Principal, Sector El Carmen, N° 45.<br>
-                        (Frente a la plaza principal).<br>
-                        Turmero, Estado Aragua.
-                    </p>
+    <!-- Cart Drawer -->
+    <div id="cart-drawer" class="fixed inset-0 z-50 pointer-events-none transition-opacity duration-300 opacity-0">
+        <div onclick="toggleCart()" class="absolute inset-0 bg-slate-900/50 backdrop-blur-sm"></div>
+        <div class="absolute right-0 top-0 bottom-0 w-full max-w-md bg-white shadow-2xl pointer-events-auto flex flex-col">
+            <div class="p-4 border-b border-slate-100 flex items-center justify-between bg-slate-50">
+                <div class="flex items-center gap-2">
+                    <i data-lucide="shopping-bag" class="w-5 h-5 text-blue-600"></i>
+                    <h3 class="font-bold text-slate-900">Tu Pedido</h3>
                 </div>
-
-                <div class="space-y-3">
-                    <div class="w-10 h-10 bg-slate-800 rounded-xl flex items-center justify-center text-brand-400">
-                        <i data-lucide="clock" class="w-5 h-5"></i>
-                    </div>
-                    <h3 class="font-bold text-white text-lg">Horario de Atención</h3>
-                    <ul class="text-slate-400 text-sm space-y-1">
-                        <li><span class="font-semibold text-white">Lunes a Sábado:</span> 7:30 AM - 7:30 PM</li>
-                        <li><span class="font-semibold text-white">Domingos:</span> 8:00 AM - 2:00 PM</li>
-                    </ul>
-                </div>
-
-                <div class="space-y-3">
-                    <div class="w-10 h-10 bg-slate-800 rounded-xl flex items-center justify-center text-brand-400">
-                        <i data-lucide="credit-card" class="w-5 h-5"></i>
-                    </div>
-                    <h3 class="font-bold text-white text-lg">Métodos de Pago</h3>
-                    <div class="flex flex-wrap gap-2 text-xs font-semibold text-slate-300">
-                        <span class="px-2.5 py-1 bg-slate-800 rounded-lg">Efectivo ($ / Bs)</span>
-                        <span class="px-2.5 py-1 bg-slate-800 rounded-lg">Pago Móvil</span>
-                        <span class="px-2.5 py-1 bg-slate-800 rounded-lg">Zelle</span>
-                        <span class="px-2.5 py-1 bg-slate-800 rounded-lg">Punto de Venta</span>
-                    </div>
-                </div>
-
+                <button onclick="toggleCart()" class="p-2 rounded-lg text-slate-400 hover:text-slate-600">
+                    <i data-lucide="x" class="w-5 h-5"></i>
+                </button>
             </div>
-        </div>
-    </section>
 
-    <!-- FOOTER -->
-    <footer class="bg-slate-950 py-6 text-center text-xs text-slate-500 border-t border-slate-900">
-        <p>© 2026 Bodega Medina - Todos los derechos reservados.</p>
-    </footer>
+            <div id="cart-items" class="flex-grow overflow-y-auto p-4 space-y-3">
+                <!-- Cart Items Dynamic -->
+            </div>
 
-    <!-- DRAWER DEL CARRITO DE COMPRAS -->
-    <div id="cart-drawer" class="fixed inset-0 z-50 overflow-hidden pointer-events-none transition-opacity duration-300 opacity-0">
-        <div id="cart-backdrop" onclick="toggleCart()" class="absolute inset-0 bg-slate-900/60 backdrop-blur-sm"></div>
-
-        <div class="fixed inset-y-0 right-0 max-w-full flex pl-10">
-            <div class="w-screen max-w-md bg-white text-slate-800 shadow-2xl flex flex-col pointer-events-auto">
-                
-                <div class="p-6 bg-slate-50 border-b border-slate-200 flex items-center justify-between">
-                    <div class="flex items-center gap-3">
-                        <i data-lucide="shopping-bag" class="w-6 h-6 text-brand-600"></i>
-                        <h3 class="text-lg font-bold text-slate-900">Tu Carrito de Compra</h3>
-                    </div>
-                    <button onclick="toggleCart()" class="p-2 hover:bg-slate-200 rounded-xl text-slate-500 transition-colors">
-                        <i data-lucide="x" class="w-5 h-5"></i>
-                    </button>
+            <div class="p-4 border-t border-slate-100 bg-slate-50 space-y-3">
+                <div class="flex justify-between items-center text-lg font-bold text-slate-900">
+                    <span>Total estimado:</span>
+                    <span id="cart-total">$0.00</span>
                 </div>
-
-                <div id="cart-items" class="flex-1 overflow-y-auto p-6 space-y-4">
-                    <!-- Items dinámicos -->
+                <div>
+                    <label class="block text-xs font-semibold text-slate-600 mb-1">Nombre para la entrega:</label>
+                    <input type="text" id="customer-name" placeholder="Tu nombre" class="w-full px-3 py-2 rounded-lg border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
                 </div>
-
-                <div class="p-6 bg-slate-50 border-t border-slate-200 space-y-4">
-                    <div class="space-y-2">
-                        <div class="flex justify-between text-sm text-slate-500">
-                            <span>Subtotal estimado:</span>
-                            <span id="cart-subtotal" class="font-semibold text-slate-800">$0.00</span>
-                        </div>
-                        <div class="flex justify-between text-base font-extrabold text-slate-900 border-t border-slate-200 pt-2">
-                            <span>Total a Pagar:</span>
-                            <span id="cart-total" class="text-brand-600 text-xl">$0.00</span>
-                        </div>
-                    </div>
-
-                    <div>
-                        <label for="client-name" class="block text-xs font-semibold text-slate-600 mb-1">Nombre para la entrega (Opcional):</label>
-                        <input type="text" id="client-name" placeholder="Ej: Carlos Mendoza" class="w-full px-3 py-2 bg-white border border-slate-300 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 text-slate-800">
-                    </div>
-
-                    <button onclick="sendWhatsAppOrder()" class="w-full py-3.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl font-bold transition-all shadow-lg shadow-emerald-600/20 flex items-center justify-center gap-2">
-                        <i data-lucide="message-circle" class="w-5 h-5"></i>
-                        Enviar Pedido por WhatsApp
-                    </button>
-                </div>
-
+                <button onclick="sendWhatsAppOrder()" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 rounded-xl shadow-lg flex items-center justify-center gap-2 transition">
+                    <i data-lucide="message-circle" class="w-5 h-5"></i>
+                    Enviar pedido por WhatsApp
+                </button>
             </div>
         </div>
     </div>
 
-    <!-- JAVASCRIPT DE LÓGICA INTERACTIVA -->
+    <!-- JavaScript App Logic -->
     <script>
         const products = [
-            // AGUA
-            { id: 1, name: 'Recarga Botellón 20 Litros', price: 1.50, category: 'agua', image: 'https://images.unsplash.com/photo-1548839140-29a749e1bc4e?w=500&auto=format&fit=crop&q=60', desc: 'Agua purificada triple filtrado y UV' },
-            { id: 2, name: 'Recarga Garrafón 10 Litros', price: 1.00, category: 'agua', image: 'https://images.unsplash.com/photo-1527153857715-3908f2bae5e8?w=500&auto=format&fit=crop&q=60', desc: 'Tamaño práctico para hogar u oficina' },
-            { id: 3, name: 'Botellón Nuevo 20L + Llenado', price: 12.00, category: 'agua', image: 'https://images.unsplash.com/photo-1602143407151-7111542de6e8?w=500&auto=format&fit=crop&q=60', desc: 'Envase virgen de alta resistencia' },
-
-            // VÍVERES Y ABARROTES
-            { id: 4, name: 'Harina de Maíz Precocida 1kg', price: 1.10, category: 'viveres', image: 'https://images.unsplash.com/photo-1586201375761-83865001e31c?w=500&auto=format&fit=crop&q=60', desc: 'Ideal para arepas' },
-            { id: 5, name: 'Arroz Blanco Grano Largo 1kg', price: 1.20, category: 'viveres', image: 'https://images.unsplash.com/photo-1586201375761-83865001e31c?w=500&auto=format&fit=crop&q=60', desc: 'Grano entero seleccionado' },
-            { id: 6, name: 'Aceite Vegetal 1 Litro', price: 2.75, category: 'viveres', image: 'https://images.unsplash.com/photo-1474979266404-7eaacbcd87c5?w=500&auto=format&fit=crop&q=60', desc: 'Aceite puro para cocinar' },
-            { id: 7, name: 'Pasta Espagueti 1kg', price: 1.30, category: 'viveres', image: 'https://images.unsplash.com/photo-1621996346565-e3d5d6288029?w=500&auto=format&fit=crop&q=60', desc: 'Trigo fortificado' },
-            { id: 8, name: 'Café Molido Gourmet 250g', price: 2.90, category: 'viveres', image: 'https://images.unsplash.com/photo-1559056199-641a0ac8b55e?w=500&auto=format&fit=crop&q=60', desc: 'Café de aroma intenso' },
-            { id: 9, name: 'Caraotas / Frijoles Negros 500g', price: 1.40, category: 'viveres', image: 'https://images.unsplash.com/photo-1551462147-ff29053bfc14?w=500&auto=format&fit=crop&q=60', desc: 'Granos limpios' },
-
-            // BEBIDAS & SNACKS
-            { id: 10, name: 'Refresco Cola 1.5L', price: 1.80, category: 'bebidas', image: 'https://images.unsplash.com/photo-1622483767028-3f66f32aef97?w=500&auto=format&fit=crop&q=60', desc: 'Bebida gaseosa fría' },
-            { id: 11, name: 'Jugo Citrus 1 Litro', price: 1.50, category: 'bebidas', image: 'https://images.unsplash.com/photo-1613478223719-2ab802602423?w=500&auto=format&fit=crop&q=60', desc: 'Sabor refrescante' },
-            { id: 12, name: 'Papas Saladas Snack 150g', price: 1.50, category: 'bebidas', image: 'https://images.unsplash.com/photo-1566478989037-eec170784d0b?w=500&auto=format&fit=crop&q=60', desc: 'Crujientes y listas para compartir' },
-
-            // LIMPIEZA Y HOGAR
-            { id: 13, name: 'Detergente Multiuso 1kg', price: 2.40, category: 'hogar', image: 'https://images.unsplash.com/photo-1585830812416-a6c86bb14576?w=500&auto=format&fit=crop&q=60', desc: 'Limpieza profunda' },
-            { id: 14, name: 'Lavaplatos Líquido 500ml', price: 1.60, category: 'hogar', image: 'https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?w=500&auto=format&fit=crop&q=60', desc: 'Alto poder arrancagrasa' }
+            { id: 1, name: "Recarga Botellón 20L", price: 1.50, category: "Agua", icon: "droplet" },
+            { id: 2, name: "Harina de Maíz 1kg", price: 1.20, category: "Víveres", icon: "box" },
+            { id: 3, name: "Arroz Blanco 1kg", price: 1.10, category: "Víveres", icon: "box" },
+            { id: 4, name: "Aceite Vegetal 1L", price: 2.50, category: "Víveres", icon: "box" },
+            { id: 5, name: "Queso Blanco Duro (kg)", price: 5.50, category: "Charcutería", icon: "shopping-bag" },
+            { id: 6, name: "Refresco 2 Litros", price: 2.00, category: "Bebidas", icon: "cup-soda" }
         ];
 
         let cart = [];
-        let currentCategory = 'all';
+        let currentCategory = "Todos";
 
-        window.onload = function() {
-            lucide.createIcons();
+        function init() {
+            renderCategories();
             renderProducts();
-        };
-
-        function renderProducts() {
-            const grid = document.getElementById('products-grid');
-            const searchVal = document.getElementById('search-input').value.toLowerCase();
-            const noResults = document.getElementById('no-results');
-
-            grid.innerHTML = '';
-
-            const filtered = products.filter(p => {
-                const matchesCat = currentCategory === 'all' || p.category === currentCategory;
-                const matchesSearch = p.name.toLowerCase().includes(searchVal) || p.desc.toLowerCase().includes(searchVal);
-                return matchesCat && matchesSearch;
-            });
-
-            if (filtered.length === 0) {
-                noResults.classList.remove('hidden');
-            } else {
-                noResults.classList.add('hidden');
-            }
-
-            filtered.forEach(product => {
-                const card = document.createElement('div');
-                card.className = "bg-white border border-slate-200 rounded-2xl overflow-hidden hover:shadow-lg transition-all flex flex-col justify-between group";
-                
-                card.innerHTML = `
-                    <div>
-                        <div class="h-44 overflow-hidden bg-slate-100 relative">
-                            <img src="${product.image}" alt="${product.name}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" onerror="this.src='https://placehold.co/400x300/f1f5f9/0f172a?text=Bodega+Medina'">
-                            <span class="absolute top-3 left-3 bg-white/90 backdrop-blur-md text-[10px] font-bold px-2.5 py-1 rounded-lg text-slate-700 uppercase tracking-wider border border-slate-200 shadow-sm">
-                                ${product.category}
-                            </span>
-                        </div>
-                        <div class="p-4">
-                            <h3 class="font-bold text-slate-900 text-base leading-snug">${product.name}</h3>
-                            <p class="text-xs text-slate-500 mt-1 line-clamp-2">${product.desc}</p>
-                            <div class="mt-3 flex items-baseline gap-1">
-                                <span class="text-2xl font-black text-brand-600">$${product.price.toFixed(2)}</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="p-4 pt-0">
-                        <button onclick="addToCart(${product.id}, '${product.name}', ${product.price}, '${product.category}')" class="w-full py-2.5 bg-slate-100 hover:bg-brand-600 text-slate-700 hover:text-white font-bold rounded-xl text-xs transition-all flex items-center justify-center gap-2">
-                            <i data-lucide="shopping-cart" class="w-4 h-4"></i>
-                            Agregar al Carrito
-                        </button>
-                    </div>
-                `;
-                grid.appendChild(card);
-            });
-
             lucide.createIcons();
         }
 
-        function setCategory(cat, btnElement) {
-            currentCategory = cat;
-            
-            const buttons = document.querySelectorAll('.category-btn');
-            buttons.forEach(btn => {
-                btn.classList.remove('bg-brand-600', 'text-white', 'shadow-sm');
-                btn.classList.add('bg-white', 'border', 'border-slate-200', 'text-slate-600');
-            });
+        function renderCategories() {
+            const categories = ["Todos", ...new Set(products.map(p => p.category))];
+            const container = document.getElementById("categories-container");
+            container.innerHTML = categories.map(cat => `
+                <button onclick="setCategory('${cat}')" class="px-4 py-2 rounded-xl text-sm font-medium transition whitespace-nowrap ${currentCategory === cat ? 'bg-blue-600 text-white shadow-sm' : 'bg-white text-slate-600 border border-slate-200 hover:bg-slate-50'}">
+                    ${cat}
+                </button>
+            `).join("");
+        }
 
-            btnElement.classList.remove('bg-white', 'border', 'border-slate-200', 'text-slate-600');
-            btnElement.classList.add('bg-brand-600', 'text-white', 'shadow-sm');
+        function setCategory(category) {
+            currentCategory = category;
+            renderCategories();
+            filterProducts();
+        }
 
-            renderProducts();
+        function renderProducts(items = products) {
+            const grid = document.getElementById("products-grid");
+            if (items.length === 0) {
+                grid.innerHTML = `<div class="col-span-full text-center py-12 text-slate-400">No se encontraron productos.</div>`;
+                return;
+            }
+            grid.innerHTML = items.map(p => `
+                <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm flex flex-col justify-between hover:shadow-md transition">
+                    <div class="flex items-start justify-between mb-4">
+                        <div class="p-3 bg-blue-50 text-blue-600 rounded-xl">
+                            <i data-lucide="${p.icon}" class="w-6 h-6"></i>
+                        </div>
+                        <span class="text-xs font-semibold px-2.5 py-1 bg-slate-100 text-slate-600 rounded-lg">${p.category}</span>
+                    </div>
+                    <div>
+                        <h3 class="font-semibold text-slate-900">${p.name}</h3>
+                        <p class="text-lg font-bold text-blue-600 mt-1">$${p.price.toFixed(2)}</p>
+                    </div>
+                    <button onclick="addToCart(${p.id})" class="mt-4 w-full bg-slate-900 hover:bg-slate-800 text-white font-medium py-2.5 rounded-xl transition flex items-center justify-center gap-2 text-sm">
+                        <i data-lucide="plus" class="w-4 h-4"></i> Agregar
+                    </button>
+                </div>
+            `).join("");
+            lucide.createIcons();
         }
 
         function filterProducts() {
-            renderProducts();
+            const query = document.getElementById("search-input").value.toLowerCase();
+            const filtered = products.filter(p => {
+                const matchesSearch = p.name.toLowerCase().includes(query);
+                const matchesCategory = currentCategory === "Todos" || p.category === currentCategory;
+                return matchesSearch && matchesCategory;
+            });
+            renderProducts(filtered);
         }
 
-        function addToCart(id, name, price, category) {
-            const existing = cart.find(item => item.id === id);
-            if (existing) {
-                existing.quantity += 1;
+        function addToCart(productId) {
+            const product = products.find(p => p.id === productId);
+            const item = cart.find(c => c.id === productId);
+            if (item) {
+                item.quantity++;
             } else {
-                cart.push({ id, name, price, category, quantity: 1 });
+                cart.push({ ...product, quantity: 1 });
             }
             updateCartUI();
         }
 
-        function updateQuantity(id, change) {
-            const item = cart.find(i => i.id === id);
+        function updateCartUI() {
+            const badge = document.getElementById("cart-badge");
+            const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+            badge.innerText = totalItems;
+            badge.classList.toggle("hidden", totalItems === 0);
+
+            const container = document.getElementById("cart-items");
+            if (cart.length === 0) {
+                container.innerHTML = `<p class="text-center text-slate-400 py-8 text-sm">El carrito está vacío</p>`;
+            } else {
+                container.innerHTML = cart.map(item => `
+                    <div class="flex items-center justify-between bg-slate-50 p-3 rounded-xl border border-slate-200">
+                        <div>
+                            <p class="font-semibold text-slate-800 text-sm">${item.name}</p>
+                            <p class="text-xs text-slate-500">$${item.price.toFixed(2)} c/u</p>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <button onclick="changeQty(${item.id}, -1)" class="w-7 h-7 rounded-lg bg-white border border-slate-200 flex items-center justify-center font-bold text-slate-600">-</button>
+                            <span class="text-sm font-bold w-4 text-center">${item.quantity}</span>
+                            <button onclick="changeQty(${item.id}, 1)" class="w-7 h-7 rounded-lg bg-white border border-slate-200 flex items-center justify-center font-bold text-slate-600">+</button>
+                        </div>
+                    </div>
+                `).join("");
+            }
+
+            const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            document.getElementById("cart-total").innerText = `$${total.toFixed(2)}`;
+        }
+
+        function changeQty(id, delta) {
+            const item = cart.find(c => c.id === id);
             if (item) {
-                item.quantity += change;
+                item.quantity += delta;
                 if (item.quantity <= 0) {
-                    cart = cart.filter(i => i.id !== id);
+                    cart = cart.filter(c => c.id !== id);
                 }
             }
             updateCartUI();
         }
 
-        function removeFromCart(id) {
-            cart = cart.filter(i => i.id !== id);
-            updateCartUI();
-        }
-
-        function updateCartUI() {
-            const container = document.getElementById('cart-items');
-            const badge = document.getElementById('cart-badge');
-            const subtotalEl = document.getElementById('cart-subtotal');
-            const totalEl = document.getElementById('cart-total');
-
-            container.innerHTML = '';
-
-            let total = 0;
-            let totalItems = 0;
-
-            if (cart.length === 0) {
-                container.innerHTML = `
-                    <div class="text-center py-12 text-slate-400">
-                        <i data-lucide="shopping-bag" class="w-12 h-12 mx-auto mb-2 opacity-50"></i>
-                        <p class="text-sm">Tu carrito está vacío.</p>
-                    </div>
-                `;
-            } else {
-                cart.forEach(item => {
-                    const itemTotal = item.price * item.quantity;
-                    total += itemTotal;
-                    totalItems += item.quantity;
-
-                    const row = document.createElement('div');
-                    row.className = "flex items-center justify-between p-3 bg-slate-50 border border-slate-200 rounded-xl";
-                    row.innerHTML = `
-                        <div class="flex-1 pr-2">
-                            <h4 class="font-bold text-slate-800 text-sm">${item.name}</h4>
-                            <p class="text-xs text-slate-500">$${item.price.toFixed(2)} c/u</p>
-                        </div>
-                        <div class="flex items-center gap-3">
-                            <div class="flex items-center border border-slate-300 rounded-lg bg-white">
-                                <button onclick="updateQuantity(${item.id}, -1)" class="px-2 py-1 text-slate-600 hover:bg-slate-100 rounded-l-lg text-xs font-bold">-</button>
-                                <span class="px-2.5 text-xs font-bold text-slate-800">${item.quantity}</span>
-                                <button onclick="updateQuantity(${item.id}, 1)" class="px-2 py-1 text-slate-600 hover:bg-slate-100 rounded-r-lg text-xs font-bold">+</button>
-                            </div>
-                            <span class="font-bold text-sm text-slate-900 w-12 text-right">$${itemTotal.toFixed(2)}</span>
-                            <button onclick="removeFromCart(${item.id})" class="text-rose-500 hover:text-rose-700 p-1">
-                                <i data-lucide="trash-2" class="w-4 h-4"></i>
-                            </button>
-                        </div>
-                    `;
-                    container.appendChild(row);
-                });
-            }
-
-            badge.innerText = totalItems;
-            subtotalEl.innerText = `$${total.toFixed(2)}`;
-            totalEl.innerText = `$${total.toFixed(2)}`;
-
-            lucide.createIcons();
-        }
-
         function toggleCart() {
-            const drawer = document.getElementById('cart-drawer');
-            if (drawer.classList.contains('pointer-events-none')) {
-                drawer.classList.remove('pointer-events-none', 'opacity-0');
-            } else {
-                drawer.classList.add('pointer-events-none', 'opacity-0');
-            }
+            const drawer = document.getElementById("cart-drawer");
+            drawer.classList.toggle("opacity-0");
+            drawer.classList.toggle("pointer-events-none");
         }
 
         function sendWhatsAppOrder() {
             if (cart.length === 0) {
-                alert('Añade al menos un producto a tu carrito antes de enviar el pedido.');
+                alert("Agrega productos al carrito antes de pedir.");
                 return;
             }
-
-            const name = document.getElementById('client-name').value.trim() || 'Cliente';
-            let total = 0;
-
-            let message = `🛒 *NUEVO PEDIDO - BODEGA MEDINA*\n`;
-            message += `👤 *Cliente:* ${name}\n`;
-            message += `-----------------------------------\n`;
-
+            const name = document.getElementById("customer-name").value.trim() || "Cliente";
+            let text = `Hola *Bodega Medina*, mi nombre es *${name}* y quiero hacer el siguiente pedido:\n\n`;
             cart.forEach(item => {
-                const itemTotal = item.price * item.quantity;
-                total += itemTotal;
-                message += `▪️ ${item.quantity}x ${item.name} ($${itemTotal.toFixed(2)})\n`;
+                text += `• ${item.quantity}x ${item.name} ($${(item.price * item.quantity).toFixed(2)})\n`;
             });
+            const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            text += `\n*Total a pagar:* $${total.toFixed(2)}`;
 
-            message += `-----------------------------------\n`;
-            message += `💰 *TOTAL ESTIMADO:* $${total.toFixed(2)}\n\n`;
-            message += `Por favor confirmen disponibilidad y costo final. ¡Muchas gracias!`;
-
-            const encodedMessage = encodeURIComponent(message);
-            window.open(`https://wa.me/584120000000?text=${encodedMessage}`, '_blank');
+            const phone = "584120000000"; // Reemplaza por tu número de teléfono real con código de país
+            window.open(`https://wa.me/${phone}?text=${encodeURIComponent(text)}`, "_blank");
         }
+
+        window.onload = init;
     </script>
 </body>
 </html>
