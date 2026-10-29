@@ -30,9 +30,11 @@
                 </div>
             </div>
 
-            <button onclick="toggleCart()" class="relative p-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 transition text-slate-700">
+            <!-- Cart Trigger Button -->
+            <button onclick="toggleCart()" class="relative p-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 transition text-slate-700 flex items-center gap-2">
                 <i data-lucide="shopping-cart" class="w-5 h-5"></i>
-                <span id="cart-badge" class="hidden absolute -top-1 -right-1 bg-blue-600 text-white text-xs font-bold w-5 h-5 rounded-full flex items-center justify-center">0</span>
+                <span class="text-sm font-semibold hidden sm:inline">Carrito</span>
+                <span id="cart-badge" class="hidden bg-blue-600 text-white text-xs font-bold px-2 py-0.5 rounded-full">0</span>
             </button>
         </div>
     </header>
@@ -58,7 +60,7 @@
         <!-- Category Navigation Tabs -->
         <div class="border-b border-slate-200 mb-6">
             <nav class="flex gap-2 overflow-x-auto pb-px scrollbar-none" id="tabs-container">
-                <!-- Navigation tabs dynamically injected here -->
+                <!-- Dynamic Tabs -->
             </nav>
         </div>
 
@@ -71,47 +73,170 @@
 
         <!-- Catalog Grid -->
         <div id="products-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            <!-- Dynamic Product Cards -->
+            <!-- Dynamic Products -->
         </div>
     </main>
 
-    <!-- Cart Drawer -->
+    <!-- Cart Drawer & Multi-Step Checkout Modal -->
     <div id="cart-drawer" class="fixed inset-0 z-50 pointer-events-none transition-opacity duration-300 opacity-0">
-        <div onclick="toggleCart()" class="absolute inset-0 bg-slate-900/50 backdrop-blur-sm"></div>
+        <!-- Backdrop -->
+        <div onclick="toggleCart()" class="absolute inset-0 bg-slate-900/60 backdrop-blur-sm"></div>
+        
+        <!-- Drawer Panel -->
         <div class="absolute right-0 top-0 bottom-0 w-full max-w-md bg-white shadow-2xl pointer-events-auto flex flex-col">
+            
+            <!-- Drawer Header -->
             <div class="p-4 border-b border-slate-100 flex items-center justify-between bg-slate-50">
                 <div class="flex items-center gap-2">
                     <i data-lucide="shopping-bag" class="w-5 h-5 text-blue-600"></i>
-                    <h3 class="font-bold text-slate-900">Tu Pedido</h3>
+                    <h3 class="font-bold text-slate-900" id="cart-title">Tu Carrito de Compras</h3>
                 </div>
-                <button onclick="toggleCart()" class="p-2 rounded-lg text-slate-400 hover:text-slate-600">
+                <button onclick="toggleCart()" class="p-2 rounded-lg text-slate-400 hover:text-slate-600 transition">
                     <i data-lucide="x" class="w-5 h-5"></i>
                 </button>
             </div>
 
-            <div id="cart-items" class="flex-grow overflow-y-auto p-4 space-y-3">
-                <!-- Cart Items Dynamic -->
+            <!-- STEP 1: CARRILLO (ITEMS REVIEW) -->
+            <div id="checkout-step-1" class="flex-grow overflow-y-auto p-4 space-y-4 flex flex-col justify-between">
+                <div>
+                    <div id="cart-items" class="space-y-3">
+                        <!-- Dynamic Items Loaded Here -->
+                    </div>
+                </div>
+
+                <div id="cart-summary-section" class="pt-4 border-t border-slate-100 space-y-3">
+                    <div class="space-y-1 text-sm">
+                        <div class="flex justify-between text-slate-500">
+                            <span>Subtotal artículos:</span>
+                            <span id="cart-subtotal" class="font-medium text-slate-700">$0.00</span>
+                        </div>
+                        <div class="flex justify-between text-lg font-bold text-slate-900 pt-2 border-t border-slate-100">
+                            <span>Total estimado:</span>
+                            <span id="cart-total" class="text-blue-600">$0.00</span>
+                        </div>
+                    </div>
+
+                    <button onclick="goToStep(2)" id="btn-proceed" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3.5 rounded-xl shadow-lg flex items-center justify-center gap-2 transition disabled:opacity-50 disabled:cursor-not-allowed">
+                        <span>Proceder al Pago</span>
+                        <i data-lucide="arrow-right" class="w-5 h-5"></i>
+                    </button>
+
+                    <button onclick="clearCart()" id="btn-clear" class="w-full text-xs text-rose-500 hover:text-rose-700 font-medium py-1 transition flex items-center justify-center gap-1">
+                        <i data-lucide="trash-2" class="w-3.5 h-3.5"></i> Vaciar carrito
+                    </button>
+                </div>
             </div>
 
-            <div class="p-4 border-t border-slate-100 bg-slate-50 space-y-3">
-                <div class="flex justify-between items-center text-lg font-bold text-slate-900">
-                    <span>Total estimado:</span>
-                    <span id="cart-total">$0.00</span>
+            <!-- STEP 2: DATOS DE ENTREGA -->
+            <div id="checkout-step-2" class="hidden flex-grow overflow-y-auto p-4 space-y-4 flex flex-col justify-between">
+                <div class="space-y-4">
+                    <div class="flex items-center gap-2 text-xs font-semibold text-blue-600 uppercase tracking-wider">
+                        <span>Paso 1 de 2</span> &bull; <span>Datos de Entrega</span>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-700 mb-1">Nombre Completo *</label>
+                        <input type="text" id="cust-name" placeholder="Ej: María Medina" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-700 mb-1">Teléfono de Contacto</label>
+                        <input type="tel" id="cust-phone" placeholder="Ej: 0412-1234567" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-700 mb-1">Modalidad de Entrega</label>
+                        <div class="grid grid-cols-2 gap-2">
+                            <label class="border border-slate-200 rounded-xl p-3 flex flex-col items-center justify-center cursor-pointer hover:border-blue-500 transition has-[:checked]:border-blue-600 has-[:checked]:bg-blue-50/50">
+                                <input type="radio" name="delivery-type" value="pickup" checked onchange="toggleDeliveryAddress()" class="sr-only">
+                                <i data-lucide="store" class="w-5 h-5 text-slate-600 mb-1"></i>
+                                <span class="text-xs font-medium text-slate-800">Retiro en Bodega</span>
+                            </label>
+                            <label class="border border-slate-200 rounded-xl p-3 flex flex-col items-center justify-center cursor-pointer hover:border-blue-500 transition has-[:checked]:border-blue-600 has-[:checked]:bg-blue-50/50">
+                                <input type="radio" name="delivery-type" value="delivery" onchange="toggleDeliveryAddress()" class="sr-only">
+                                <i data-lucide="truck" class="w-5 h-5 text-slate-600 mb-1"></i>
+                                <span class="text-xs font-medium text-slate-800">Delivery</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div id="address-container" class="hidden">
+                        <label class="block text-xs font-semibold text-slate-700 mb-1">Dirección de Entrega</label>
+                        <textarea id="cust-address" rows="2" placeholder="Indicaciones o punto de referencia..." class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"></textarea>
+                    </div>
                 </div>
-                <div>
-                    <label class="block text-xs font-semibold text-slate-600 mb-1">Nombre para la entrega:</label>
-                    <input type="text" id="customer-name" placeholder="Tu nombre" class="w-full px-3 py-2 rounded-lg border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
+
+                <div class="pt-4 border-t border-slate-100 flex gap-2">
+                    <button onclick="goToStep(1)" class="w-1/3 bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold py-3 rounded-xl transition text-sm">
+                        Volver
+                    </button>
+                    <button onclick="goToStep(3)" class="w-2/3 bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded-xl shadow-lg transition text-sm flex items-center justify-center gap-2">
+                        <span>Siguiente</span>
+                        <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                    </button>
                 </div>
-                <button onclick="sendWhatsAppOrder()" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 rounded-xl shadow-lg flex items-center justify-center gap-2 transition">
-                    <i data-lucide="message-circle" class="w-5 h-5"></i>
-                    Enviar pedido por WhatsApp
-                </button>
             </div>
+
+            <!-- STEP 3: MÉTODO DE PAGO Y CONFIRMACIÓN -->
+            <div id="checkout-step-3" class="hidden flex-grow overflow-y-auto p-4 space-y-4 flex flex-col justify-between">
+                <div class="space-y-4">
+                    <div class="flex items-center gap-2 text-xs font-semibold text-blue-600 uppercase tracking-wider">
+                        <span>Paso 2 de 2</span> &bull; <span>Método de Pago</span>
+                    </div>
+
+                    <div class="space-y-2">
+                        <label class="block text-xs font-semibold text-slate-700">Selecciona la forma de pago:</label>
+                        
+                        <label class="flex items-center justify-between border border-slate-200 p-3.5 rounded-xl cursor-pointer hover:border-blue-500 transition has-[:checked]:border-blue-600 has-[:checked]:bg-blue-50/50">
+                            <div class="flex items-center gap-3">
+                                <input type="radio" name="payment-method" value="Pago Móvil" checked class="text-blue-600 focus:ring-blue-500">
+                                <span class="text-sm font-medium text-slate-800">Pago Móvil</span>
+                            </div>
+                            <i data-lucide="smartphone" class="w-5 h-5 text-slate-400"></i>
+                        </label>
+
+                        <label class="flex items-center justify-between border border-slate-200 p-3.5 rounded-xl cursor-pointer hover:border-blue-500 transition has-[:checked]:border-blue-600 has-[:checked]:bg-blue-50/50">
+                            <div class="flex items-center gap-3">
+                                <input type="radio" name="payment-method" value="Efectivo / Divisas ($)" class="text-blue-600 focus:ring-blue-500">
+                                <span class="text-sm font-medium text-slate-800">Efectivo / Divisas ($)</span>
+                            </div>
+                            <i data-lucide="banknote" class="w-5 h-5 text-slate-400"></i>
+                        </label>
+
+                        <label class="flex items-center justify-between border border-slate-200 p-3.5 rounded-xl cursor-pointer hover:border-blue-500 transition has-[:checked]:border-blue-600 has-[:checked]:bg-blue-50/50">
+                            <div class="flex items-center gap-3">
+                                <input type="radio" name="payment-method" value="Transferencia Bancaria" class="text-blue-600 focus:ring-blue-500">
+                                <span class="text-sm font-medium text-slate-800">Transferencia Bancaria</span>
+                            </div>
+                            <i data-lucide="building-2" class="w-5 h-5 text-slate-400"></i>
+                        </label>
+                    </div>
+
+                    <div class="p-3.5 bg-blue-50 border border-blue-100 rounded-xl space-y-1">
+                        <div class="flex justify-between text-xs text-blue-800 font-semibold">
+                            <span>Resumen del Pedido</span>
+                            <span id="final-total-display">$0.00</span>
+                        </div>
+                        <p class="text-[11px] text-blue-600">Al hacer clic en el botón de abajo, serás redirigido a WhatsApp con la información completa de tu pedido.</p>
+                    </div>
+                </div>
+
+                <div class="pt-4 border-t border-slate-100 flex gap-2">
+                    <button onclick="goToStep(2)" class="w-1/3 bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold py-3 rounded-xl transition text-sm">
+                        Volver
+                    </button>
+                    <button onclick="sendWhatsAppOrder()" class="w-2/3 bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 rounded-xl shadow-lg transition text-sm flex items-center justify-center gap-2">
+                        <i data-lucide="message-circle" class="w-5 h-5"></i>
+                        <span>Confirmar Pedido</span>
+                    </button>
+                </div>
+            </div>
+
         </div>
     </div>
 
     <script>
-        // Listado de Productos del Inventario
+        // Inventario de Productos
         const products = [
             // Víveres
             { id: 1, name: "Harina de Maíz PAN 1kg", price: 1.20, category: "Víveres", icon: "box" },
@@ -136,7 +261,6 @@
             { id: 22, name: "Caramelos de Menta", price: 0.05, category: "Chucherías", icon: "cookie" },
             { id: 23, name: "Caramelos Chaos Mora", price: 0.06, category: "Chucherías", icon: "cookie" },
             { id: 24, name: "Chupetas", price: 0.25, category: "Chucherías", icon: "cookie" },
-            { id: 15, name: "Papas Fritas Lay's", price: 1.00, category: "Chucherías", icon: "cookie" },
 
             // Bebidas
             { id: 25, name: "Refresco Coca-Cola 355ml", price: 0.70, category: "Bebidas", icon: "cup-soda" },
@@ -273,26 +397,50 @@
             badge.classList.toggle("hidden", totalItems === 0);
 
             const container = document.getElementById("cart-items");
+            const btnProceed = document.getElementById("btn-proceed");
+
             if (cart.length === 0) {
-                container.innerHTML = `<p class="text-center text-slate-400 py-8 text-sm">El carrito está vacío</p>`;
+                container.innerHTML = `
+                    <div class="text-center py-12 space-y-3">
+                        <div class="w-16 h-16 bg-slate-100 text-slate-400 rounded-full flex items-center justify-center mx-auto">
+                            <i data-lucide="shopping-cart" class="w-8 h-8"></i>
+                        </div>
+                        <p class="text-slate-500 font-medium text-sm">Tu carrito está vacío</p>
+                        <p class="text-xs text-slate-400">Agrega productos del catálogo para comenzar</p>
+                    </div>
+                `;
+                btnProceed.disabled = true;
             } else {
+                btnProceed.disabled = false;
                 container.innerHTML = cart.map(item => `
-                    <div class="flex items-center justify-between bg-slate-50 p-3 rounded-xl border border-slate-200">
-                        <div>
-                            <p class="font-semibold text-slate-800 text-sm">${item.name}</p>
-                            <p class="text-xs text-slate-500">$${item.price.toFixed(2)} c/u</p>
+                    <div class="flex items-center justify-between bg-slate-50 p-3.5 rounded-2xl border border-slate-200/80">
+                        <div class="flex-1 pr-3">
+                            <p class="font-semibold text-slate-900 text-sm leading-tight">${item.name}</p>
+                            <p class="text-xs text-blue-600 font-semibold mt-0.5">$${item.price.toFixed(2)} c/u</p>
                         </div>
                         <div class="flex items-center gap-2">
-                            <button onclick="changeQty(${item.id}, -1)" class="w-7 h-7 rounded-lg bg-white border border-slate-200 flex items-center justify-center font-bold text-slate-600">-</button>
-                            <span class="text-sm font-bold w-4 text-center">${item.quantity}</span>
-                            <button onclick="changeQty(${item.id}, 1)" class="w-7 h-7 rounded-lg bg-white border border-slate-200 flex items-center justify-center font-bold text-slate-600">+</button>
+                            <div class="flex items-center bg-white border border-slate-200 rounded-xl shadow-sm">
+                                <button onclick="changeQty(${item.id}, -1)" class="w-7 h-7 flex items-center justify-center text-slate-600 hover:bg-slate-100 rounded-l-xl transition">
+                                    <i data-lucide="minus" class="w-3.5 h-3.5"></i>
+                                </button>
+                                <span class="text-xs font-bold w-6 text-center text-slate-800">${item.quantity}</span>
+                                <button onclick="changeQty(${item.id}, 1)" class="w-7 h-7 flex items-center justify-center text-slate-600 hover:bg-slate-100 rounded-r-xl transition">
+                                    <i data-lucide="plus" class="w-3.5 h-3.5"></i>
+                                </button>
+                            </div>
+                            <button onclick="removeFromCart(${item.id})" class="p-1.5 text-rose-500 hover:text-rose-700 hover:bg-rose-50 rounded-lg transition">
+                                <i data-lucide="trash-2" class="w-4 h-4"></i>
+                            </button>
                         </div>
                     </div>
                 `).join("");
             }
 
             const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            document.getElementById("cart-subtotal").innerText = `$${total.toFixed(2)}`;
             document.getElementById("cart-total").innerText = `$${total.toFixed(2)}`;
+            document.getElementById("final-total-display").innerText = `$${total.toFixed(2)}`;
+            lucide.createIcons();
         }
 
         function changeQty(id, delta) {
@@ -300,33 +448,84 @@
             if (item) {
                 item.quantity += delta;
                 if (item.quantity <= 0) {
-                    cart = cart.filter(c => c.id !== id);
+                    removeFromCart(id);
+                    return;
                 }
             }
             updateCartUI();
+        }
+
+        function removeFromCart(id) {
+            cart = cart.filter(c => c.id !== id);
+            updateCartUI();
+        }
+
+        function clearCart() {
+            if (cart.length === 0) return;
+            if (confirm("¿Deseas vaciar todos los productos del carrito?")) {
+                cart = [];
+                updateCartUI();
+            }
         }
 
         function toggleCart() {
             const drawer = document.getElementById("cart-drawer");
             drawer.classList.toggle("opacity-0");
             drawer.classList.toggle("pointer-events-none");
+            goToStep(1);
+        }
+
+        function goToStep(step) {
+            document.getElementById("checkout-step-1").classList.add("hidden");
+            document.getElementById("checkout-step-2").classList.add("hidden");
+            document.getElementById("checkout-step-3").classList.add("hidden");
+
+            const titles = {
+                1: "Tu Carrito de Compras",
+                2: "Datos de Entrega",
+                3: "Forma de Pago"
+            };
+
+            document.getElementById("cart-title").innerText = titles[step];
+            document.getElementById(`checkout-step-${step}`).classList.remove("hidden");
+        }
+
+        function toggleDeliveryAddress() {
+            const deliveryType = document.querySelector('input[name="delivery-type"]:checked').value;
+            const addressContainer = document.getElementById("address-container");
+            if (deliveryType === "delivery") {
+                addressContainer.classList.remove("hidden");
+            } else {
+                addressContainer.classList.add("hidden");
+            }
         }
 
         function sendWhatsAppOrder() {
-            if (cart.length === 0) {
-                alert("Agrega productos al carrito antes de pedir.");
-                return;
+            const name = document.getElementById("cust-name").value.trim() || "Cliente";
+            const phone = document.getElementById("cust-phone").value.trim() || "No especificado";
+            const deliveryType = document.querySelector('input[name="delivery-type"]:checked').value;
+            const address = document.getElementById("cust-address").value.trim();
+            const paymentMethod = document.querySelector('input[name="payment-method"]:checked').value;
+
+            let text = `🛒 *NUEVO PEDIDO - BODEGA MEDINA*\n\n`;
+            text += `👤 *Cliente:* ${name}\n`;
+            text += `📞 *Teléfono:* ${phone}\n`;
+            text += `🚚 *Entrega:* ${deliveryType === 'delivery' ? 'Delivery a Domicilio' : 'Retiro en Bodega'}\n`;
+            if (deliveryType === 'delivery' && address) {
+                text += `📍 *Dirección:* ${address}\n`;
             }
-            const name = document.getElementById("customer-name").value.trim() || "Cliente";
-            let text = `Hola *Bodega Medina*, mi nombre es *${name}* y quiero hacer el siguiente pedido:\n\n`;
+            text += `💳 *Método de Pago:* ${paymentMethod}\n\n`;
+
+            text += `📋 *RESUMEN DEL PEDIDO:*\n`;
             cart.forEach(item => {
                 text += `• ${item.quantity}x ${item.name} ($${(item.price * item.quantity).toFixed(2)})\n`;
             });
-            const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-            text += `\n*Total a pagar:* $${total.toFixed(2)}`;
 
-            const phone = "584120000000"; // Reemplaza por tu número real de WhatsApp
-            window.open(`https://wa.me/${phone}?text=${encodeURIComponent(text)}`, "_blank");
+            const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            text += `\n💵 *TOTAL A PAGAR:* $${total.toFixed(2)}`;
+
+            const whatsappNumber = "584120000000"; // Reemplaza por tu número de WhatsApp
+            window.open(`https://wa.me/${whatsappNumber}?text=${encodeURIComponent(text)}`, "_blank");
         }
 
         window.onload = init;
