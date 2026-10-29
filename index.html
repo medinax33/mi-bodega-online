@@ -72,7 +72,7 @@
         </div>
 
         <!-- Catalog Grid -->
-        <div id="products-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div id="products-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 pb-12">
             <!-- Dynamic Products -->
         </div>
     </main>
@@ -377,12 +377,11 @@
                 return;
             }
 
-            grid.innerHTML = items.map(p => `
-                <!-- El evento hover ahora cubre toda la tarjeta del producto para mayor comodidad -->
-                <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm flex flex-col justify-between hover:shadow-md transition group/card"
-                     data-usd="${p.price}"
-                     onmouseenter="showBolivares(this)"
-                     onmouseleave="showDolares(this)">
+            // Renderizamos las tarjetas con un ID único para asegurar que JavaScript las controle sin errores de borde
+            grid.innerHTML = items.map((p, index) => `
+                <div id="product-card-${p.id}-${index}" 
+                     class="product-card bg-white p-5 rounded-2xl border border-slate-200 shadow-sm flex flex-col justify-between hover:shadow-md transition cursor-pointer"
+                     data-usd="${p.price}">
                     <div>
                         <div class="flex items-start justify-between mb-4">
                             <div class="p-3 bg-blue-50 text-blue-600 rounded-xl">
@@ -391,41 +390,46 @@
                             <span class="text-xs font-semibold px-2.5 py-1 bg-slate-100 text-slate-600 rounded-lg">${p.category}</span>
                         </div>
                         <h3 class="font-semibold text-slate-900">${p.name}</h3>
-                        <div class="mt-1 select-none inline-block">
+                        <div class="mt-1 select-none inline-block price-wrapper">
                             <p class="text-lg font-bold text-blue-600 price-text transition-colors">$${p.price.toFixed(2)}</p>
-                            <span class="text-[10px] text-slate-400 block -mt-1 font-medium group-hover/card:text-emerald-600 transition-colors">Tasa BCV (Pasa el cursor)</span>
+                            <span class="text-[10px] text-slate-400 block -mt-1 font-medium price-sub">Tasa BCV (Pasa el cursor)</span>
                         </div>
                     </div>
-                    <button onclick="addToCart(${p.id})" class="mt-4 w-full bg-slate-900 hover:bg-slate-800 text-white font-medium py-2.5 rounded-xl transition flex items-center justify-center gap-2 text-sm">
+                    <button onclick="event.stopPropagation(); addToCart(${p.id})" class="mt-4 w-full bg-slate-900 hover:bg-slate-800 text-white font-medium py-2.5 rounded-xl transition flex items-center justify-center gap-2 text-sm">
                         <i data-lucide="plus" class="w-4 h-4"></i> Agregar
                     </button>
                 </div>
             `).join("");
+            
             lucide.createIcons();
+            attachCardEvents(); // Activamos los detectores de eventos robustos
         }
 
-        // Funciones actualizadas para manejar la tarjeta completa
-        function showBolivares(cardElement) {
-            const usdPrice = parseFloat(cardElement.getAttribute("data-usd"));
-            const bsPrice = usdPrice * TASA_BCV;
-            const textElement = cardElement.querySelector(".price-text");
-            const subText = cardElement.querySelector("span");
-            
-            textElement.innerHTML = `${bsPrice.toLocaleString('es-VE', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} Bs`;
-            textElement.classList.remove("text-blue-600");
-            textElement.classList.add("text-emerald-600");
-            subText.innerText = "Tasa BCV oficial en vivo";
-        }
+        // Sistema de eventos dinámicos por JavaScript nativo (Garantiza cobertura en todas las filas)
+        function attachCardEvents() {
+            const cards = document.querySelectorAll('.product-card');
+            cards.forEach(card => {
+                const usdPrice = parseFloat(card.getAttribute("data-usd"));
+                const textElement = card.querySelector(".price-text");
+                const subText = card.querySelector(".price-sub");
 
-        function showDolares(cardElement) {
-            const usdPrice = parseFloat(cardElement.getAttribute("data-usd"));
-            const textElement = cardElement.querySelector(".price-text");
-            const subText = cardElement.querySelector("span");
-            
-            textElement.innerHTML = `$${usdPrice.toFixed(2)}`;
-            textElement.classList.remove("text-emerald-600");
-            textElement.classList.add("text-blue-600");
-            subText.innerText = "Tasa BCV (Pasa el cursor)";
+                card.addEventListener('mouseenter', () => {
+                    const bsPrice = usdPrice * TASA_BCV;
+                    textElement.innerHTML = `${bsPrice.toLocaleString('es-VE', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} Bs`;
+                    textElement.classList.remove("text-blue-600");
+                    textElement.classList.add("text-emerald-600");
+                    subText.innerText = "Tasa BCV oficial en vivo";
+                    subText.classList.add("text-emerald-600");
+                });
+
+                card.addEventListener('mouseleave', () => {
+                    textElement.innerHTML = `$${usdPrice.toFixed(2)}`;
+                    textElement.classList.remove("text-emerald-600");
+                    textElement.classList.add("text-blue-600");
+                    subText.innerText = "Tasa BCV (Pasa el cursor)";
+                    subText.classList.remove("text-emerald-600");
+                });
+            });
         }
 
         function addToCart(productId) {
