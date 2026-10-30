@@ -42,7 +42,7 @@
     <!-- Hero Banner -->
     <section class="bg-gradient-to-br from-blue-900 via-blue-800 to-teal-800 text-white py-12 px-4 sm:px-6">
         <div class="max-w-4xl mx-auto text-center space-y-4">
-            <!-- Mensaje superior corregido para dispositivos móviles (evita cortes de bordes en líneas múltiples) -->
+            <!-- Mensaje superior corregido para dispositivos móviles -->
             <div class="inline-block bg-white/10 text-cyan-200 text-xs font-semibold px-4 py-2 rounded-2xl border border-white/20 text-center leading-relaxed max-w-full shadow-inner">
                 Atención rápida por WhatsApp • Tasa BCV Al Día • Delivery & Pick Up • RIF J-35735777-7
             </div>
@@ -133,8 +133,8 @@
                 class="w-full pl-10 pr-4 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white shadow-sm text-sm">
         </div>
 
-        <!-- Catalog Grid -->
-        <div id="products-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 pb-12">
+        <!-- Catalog Grid (Modificado a 3 columnas para lg) -->
+        <div id="products-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 pb-12">
             <!-- Dynamic Products -->
         </div>
     </main>
@@ -315,7 +315,7 @@
             }
         }
 
-        // Inventario de Productos con imágenes ilustrativas de ejemplo
+        // Inventario de Productos con imágenes ilustrativas
         const products = [
             // Víveres
             { id: 1, name: "Harina de Maíz PAN 1kg", price: 1.20, category: "Víveres", image: "https://images.unsplash.com/photo-1586201375761-83865001e31c?auto=format&fit=crop&w=500&q=80" },
