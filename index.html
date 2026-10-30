@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bodega Santa Rosa medina - Inventario & Pedidos</title>
+    <title>Bodega Medina - Inventario & Pedidos</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Lucide Icons -->
@@ -19,285 +19,178 @@
     <header class="sticky top-0 z-40 bg-white/95 backdrop-blur border-b border-slate-200 shadow-sm">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
             <div class="flex items-center gap-3 cursor-pointer" onclick="selectCategory('Inicio')">
-                <div class="w-10 h-10 rounded-xl bg-blue-600 flex items-center justify-center text-white font-bold text-xl shadow-md">
+                <div class="w-10 h-10 rounded-xl bg-emerald-600 flex items-center justify-center text-white font-bold text-xl shadow-md">
                     M
                 </div>
                 <div>
                     <h1 class="font-bold text-lg leading-none text-slate-900">Bodega Medina</h1>
                     <span class="text-xs text-emerald-600 font-medium flex items-center gap-1 mt-0.5">
-                        <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span> Abierto
+                        <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span> Abierto ahora
                     </span>
                 </div>
             </div>
 
-            <!-- Cart Trigger Button -->
-            <button onclick="toggleCart()" class="relative p-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 transition text-slate-700 flex items-center gap-2">
-                <i data-lucide="shopping-cart" class="w-5 h-5"></i>
-                <span class="text-sm font-semibold hidden sm:inline">Carrito</span>
-                <span id="cart-badge" class="hidden bg-blue-600 text-white text-xs font-bold px-2 py-0.5 rounded-full">0</span>
-            </button>
+            <!-- Quick WhatsApp Button -->
+            <a href="https://wa.me/584120000000?text=Hola,%20quisiera%20consultar%20sobre%20sus%20productos" target="_blank" class="bg-emerald-600 hover:bg-emerald-700 text-white px-4 py-2 rounded-xl text-sm font-semibold flex items-center gap-2 shadow-sm transition">
+                <i data-lucide="message-circle" class="w-4 h-4"></i>
+                <span>Atención Rápida</span>
+            </a>
         </div>
     </header>
 
     <!-- Hero Banner -->
-    <section class="bg-gradient-to-br from-blue-900 via-blue-800 to-teal-800 text-white py-10 px-4">
-        <div class="max-w-4xl mx-auto text-center space-y-3">
-            <span class="bg-white/10 text-cyan-200 text-xs font-semibold px-3 py-1 rounded-full border border-white/20">
+    <section class="bg-gradient-to-br from-emerald-900 via-teal-900 to-slate-900 text-white py-12 px-4">
+        <div class="max-w-4xl mx-auto text-center space-y-4">
+            <span class="bg-white/10 text-emerald-300 text-xs font-semibold px-3.5 py-1.5 rounded-full border border-white/20 inline-block">
                 Atención rápida por WhatsApp • Tasa BCV Al Día • Delivery & Pick Up • RIF J-35735777-7
             </span>
-            <h2 class="text-2xl sm:text-4xl font-extrabold tracking-tight">
+            <h2 class="text-3xl sm:text-5xl font-extrabold tracking-tight">
                 Calidad y frescura para tu hogar
             </h2>
-            <p class="text-blue-100 text-xs sm:text-sm max-w-xl mx-auto">
-                Coloca el cursor sobre cualquier producto para ver su precio actualizado en Bolívares.
+            <p class="text-emerald-100 text-sm sm:text-base max-w-xl mx-auto">
+                Coloca el cursor sobre cualquier producto para ver su precio actualizado en Bolívares según la tasa BCV oficial.
             </p>
         </div>
     </section>
 
+    <!-- Business Gallery (3 Photos Section) -->
+    <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-6 relative z-10">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <!-- Photo 1 -->
+            <div class="bg-white rounded-2xl overflow-hidden border border-slate-200/80 shadow-md group">
+                <div class="h-48 overflow-hidden relative">
+                    <img src="https://images.unsplash.com/photo-1578916171728-46686eac8d58?auto=format&fit=crop&w=600&q=80" alt="Pasillos y Víveres" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                    <div class="absolute inset-0 bg-gradient-to-t from-slate-900/60 via-transparent to-transparent"></div>
+                    <span class="absolute bottom-3 left-3 text-white text-xs font-bold px-2.5 py-1 bg-black/40 backdrop-blur-md rounded-lg">Variedad en Víveres</span>
+                </div>
+                <div class="p-4">
+                    <h3 class="font-bold text-slate-900 text-sm">Abastecimiento Completo</h3>
+                    <p class="text-xs text-slate-500 mt-1">Todo lo que necesitas para tu despensa diaria al alcance de tu mano.</p>
+                </div>
+            </div>
+
+            <!-- Photo 2 -->
+            <div class="bg-white rounded-2xl overflow-hidden border border-slate-200/80 shadow-md group">
+                <div class="h-48 overflow-hidden relative">
+                    <img src="https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=600&q=80" alt="Panadería Fresca" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                    <div class="absolute inset-0 bg-gradient-to-t from-slate-900/60 via-transparent to-transparent"></div>
+                    <span class="absolute bottom-3 left-3 text-white text-xs font-bold px-2.5 py-1 bg-black/40 backdrop-blur-md rounded-lg">Panes Frescos</span>
+                </div>
+                <div class="p-4">
+                    <h3 class="font-bold text-slate-900 text-sm">Horneados del Día</h3>
+                    <p class="text-xs text-slate-500 mt-1">Disfruta de pan sobado, campesino y galletas recién horneadas.</p>
+                </div>
+            </div>
+
+            <!-- Photo 3 -->
+            <div class="bg-white rounded-2xl overflow-hidden border border-slate-200/80 shadow-md group">
+                <div class="h-48 overflow-hidden relative">
+                    <img src="https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&w=600&q=80" alt="Atención en Bodega" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                    <div class="absolute inset-0 bg-gradient-to-t from-slate-900/60 via-transparent to-transparent"></div>
+                    <span class="absolute bottom-3 left-3 text-white text-xs font-bold px-2.5 py-1 bg-black/40 backdrop-blur-md rounded-lg">Atención de Primera</span>
+                </div>
+                <div class="p-4">
+                    <h3 class="font-bold text-slate-900 text-sm">Cercanía y Confianza</h3>
+                    <p class="text-xs text-slate-500 mt-1">Un servicio cálido y rápido para todos nuestros vecinos y clientes.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Main Content -->
-    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex-grow w-full space-y-8">
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 flex-grow w-full space-y-8">
         
-        <!-- NUEVA SECCIÓN: Guía de Compra Breve e Ilustrada -->
-        <section class="bg-white rounded-3xl border border-slate-200/80 p-6 sm:p-8 shadow-sm">
-            <div class="text-center max-w-xl mx-auto mb-8 space-y-2">
-                <span class="text-xs font-bold text-blue-600 tracking-wider uppercase bg-blue-50 px-3 py-1 rounded-full border border-blue-100">
-                    Fácil y Rápido
-                </span>
-                <h3 class="text-xl sm:text-2xl font-bold text-slate-900">¿Cómo realizar tu compra?</h3>
-                <p class="text-xs sm:text-sm text-slate-500">Sigue estos sencillos pasos para hacer tu pedido en segundos.</p>
-            </div>
-
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                <!-- Paso 1 -->
-                <div class="bg-slate-50/80 p-5 rounded-2xl border border-slate-200/60 flex flex-col items-center text-center space-y-3 relative group hover:bg-blue-50/40 transition">
-                    <div class="w-12 h-12 bg-blue-600 text-white rounded-2xl flex items-center justify-center shadow-md font-bold text-lg">
-                        1
-                    </div>
-                    <div class="p-3 bg-blue-100/60 text-blue-600 rounded-xl">
-                        <i data-lucide="shopping-bag" class="w-6 h-6"></i>
-                    </div>
-                    <h4 class="font-bold text-slate-900 text-sm">1. Arma tu carrito</h4>
-                    <p class="text-xs text-slate-500 leading-relaxed">Revisa el catálogo, filtra por categorías y agrega los artículos que necesites.</p>
-                </div>
-
-                <!-- Paso 2 -->
-                <div class="bg-slate-50/80 p-5 rounded-2xl border border-slate-200/60 flex flex-col items-center text-center space-y-3 relative group hover:bg-blue-50/40 transition">
-                    <div class="w-12 h-12 bg-blue-600 text-white rounded-2xl flex items-center justify-center shadow-md font-bold text-lg">
-                        2
-                    </div>
-                    <div class="p-3 bg-blue-100/60 text-blue-600 rounded-xl">
-                        <i data-lucide="credit-card" class="w-6 h-6"></i>
-                    </div>
-                    <h4 class="font-bold text-slate-900 text-sm">2. Selecciona tu pago</h4>
-                    <p class="text-xs text-slate-500 leading-relaxed">Elige tu método preferido: Pago Móvil, Divisas en efectivo o Transferencia.</p>
-                </div>
-
-                <!-- Paso 3 -->
-                <div class="bg-slate-50/80 p-5 rounded-2xl border border-slate-200/60 flex flex-col items-center text-center space-y-3 relative group hover:bg-blue-50/40 transition">
-                    <div class="w-12 h-12 bg-blue-600 text-white rounded-2xl flex items-center justify-center shadow-md font-bold text-lg">
-                        3
-                    </div>
-                    <div class="p-3 bg-blue-100/60 text-blue-600 rounded-xl">
-                        <i data-lucide="truck" class="w-6 h-6"></i>
-                    </div>
-                    <h4 class="font-bold text-slate-900 text-sm">3. Delivery o Pick-up</h4>
-                    <p class="text-xs text-slate-500 leading-relaxed">Indica si prefieres recibir tu pedido a domicilio o retirarlo directamente en la bodega.</p>
-                </div>
-
-                <!-- Paso 4 -->
-                <div class="bg-slate-50/80 p-5 rounded-2xl border border-slate-200/60 flex flex-col items-center text-center space-y-3 relative group hover:bg-emerald-50/40 transition">
-                    <div class="w-12 h-12 bg-emerald-600 text-white rounded-2xl flex items-center justify-center shadow-md font-bold text-lg">
-                        4
-                    </div>
-                    <div class="p-3 bg-emerald-100/60 text-emerald-600 rounded-xl">
-                        <i data-lucide="check-circle-2" class="w-6 h-6"></i>
-                    </div>
-                    <h4 class="font-bold text-slate-900 text-sm">4. ¡Listo! Envíalo</h4>
-                    <p class="text-xs text-slate-500 leading-relaxed">Haz clic en confirmar y tu orden llegará formateada al WhatsApp de la bodega al instante.</p>
-                </div>
-            </div>
-        </section>
-
         <!-- Category Navigation Tabs -->
-        <div class="border-b border-slate-200 mb-6 pt-4">
+        <div class="border-b border-slate-200 pt-2">
             <nav class="flex gap-2 overflow-x-auto pb-px scrollbar-none" id="tabs-container">
                 <!-- Dynamic Tabs -->
             </nav>
         </div>
 
         <!-- Search Input -->
-        <div id="search-wrapper" class="relative max-w-md mb-8">
+        <div id="search-wrapper" class="relative max-w-md">
             <i data-lucide="search" class="absolute left-3.5 top-3.5 w-5 h-5 text-slate-400"></i>
-            <input type="text" id="search-input" oninput="filterProducts()" placeholder="Buscar producto..." 
-                class="w-full pl-10 pr-4 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white shadow-sm text-sm">
+            <input type="text" id="search-input" oninput="filterProducts()" placeholder="Buscar producto en el catálogo..." 
+                class="w-full pl-10 pr-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-emerald-500 bg-white shadow-sm text-sm">
         </div>
 
-        <!-- Catalog Grid -->
-        <div id="products-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 pb-12">
+        <!-- Catalog Grid: 3 Columns -->
+        <div id="products-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 pb-12">
             <!-- Dynamic Products -->
         </div>
     </main>
 
-    <!-- Cart Drawer & Multi-Step Checkout Modal -->
-    <div id="cart-drawer" class="fixed inset-0 z-50 pointer-events-none transition-opacity duration-300 opacity-0">
-        <!-- Backdrop -->
-        <div onclick="toggleCart()" class="absolute inset-0 bg-slate-900/60 backdrop-blur-sm"></div>
-        
-        <!-- Drawer Panel -->
-        <div class="absolute right-0 top-0 bottom-0 w-full max-w-md bg-white shadow-2xl pointer-events-auto flex flex-col">
-            
-            <!-- Drawer Header -->
-            <div class="p-4 border-b border-slate-100 flex items-center justify-between bg-slate-50">
-                <div class="flex items-center gap-2">
-                    <i data-lucide="shopping-bag" class="w-5 h-5 text-blue-600"></i>
-                    <h3 class="font-bold text-slate-900" id="cart-title">Tu Carrito de Compras</h3>
-                </div>
-                <button onclick="toggleCart()" class="p-2 rounded-lg text-slate-400 hover:text-slate-600 transition">
-                    <i data-lucide="x" class="w-5 h-5"></i>
-                </button>
-            </div>
-
-            <!-- STEP 1: CARRILLO (ITEMS REVIEW) -->
-            <div id="checkout-step-1" class="flex-grow overflow-y-auto p-4 space-y-4 flex flex-col justify-between">
-                <div>
-                    <div id="cart-items" class="space-y-3">
-                        <!-- Dynamic Items Loaded Here -->
-                    </div>
-                </div>
-
-                <div id="cart-summary-section" class="pt-4 border-t border-slate-100 space-y-3">
-                    <div class="space-y-1 text-sm">
-                        <div class="flex justify-between text-slate-500">
-                            <span>Subtotal artículos:</span>
-                            <span id="cart-subtotal" class="font-medium text-slate-700">$0.00</span>
-                        </div>
-                        <div class="flex justify-between text-lg font-bold text-slate-900 pt-2 border-t border-slate-100">
-                            <span>Total estimado:</span>
-                            <span id="cart-total" class="text-blue-600">$0.00</span>
-                        </div>
-                    </div>
-
-                    <button onclick="goToStep(2)" id="btn-proceed" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3.5 rounded-xl shadow-lg flex items-center justify-center gap-2 transition disabled:opacity-50 disabled:cursor-not-allowed">
-                        <span>Proceder al Pago</span>
-                        <i data-lucide="arrow-right" class="w-5 h-5"></i>
-                    </button>
-
-                    <button onclick="clearCart()" id="btn-clear" class="w-full text-xs text-rose-500 hover:text-rose-700 font-medium py-1 transition flex items-center justify-center gap-1">
-                        <i data-lucide="trash-2" class="w-3.5 h-3.5"></i> Vaciar carrito
-                    </button>
-                </div>
-            </div>
-
-            <!-- STEP 2: DATOS DE ENTREGA -->
-            <div id="checkout-step-2" class="hidden flex-grow overflow-y-auto p-4 space-y-4 flex flex-col justify-between">
+    <!-- Footer with Contact Info & Delivery Logos -->
+    <footer class="bg-slate-900 text-slate-300 pt-16 pb-12 border-t border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                
+                <!-- Col 1: Brand & Info -->
                 <div class="space-y-4">
-                    <div class="flex items-center gap-2 text-xs font-semibold text-blue-600 uppercase tracking-wider">
-                        <span>Paso 1 de 2</span> &bull; <span>Datos de Entrega</span>
-                    </div>
-
-                    <div>
-                        <label class="block text-xs font-semibold text-slate-700 mb-1">Nombre Completo *</label>
-                        <input type="text" id="cust-name" placeholder="Ej: María Medina" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
-                    </div>
-
-                    <div>
-                        <label class="block text-xs font-semibold text-slate-700 mb-1">Teléfono de Contacto</label>
-                        <input type="tel" id="cust-phone" placeholder="Ej: 0412-1234567" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
-                    </div>
-
-                    <div>
-                        <label class="block text-xs font-semibold text-slate-700 mb-1">Modalidad de Entrega</label>
-                        <div class="grid grid-cols-2 gap-2">
-                            <label class="border border-slate-200 rounded-xl p-3 flex flex-col items-center justify-center cursor-pointer hover:border-blue-500 transition has-[:checked]:border-blue-600 has-[:checked]:bg-blue-50/50">
-                                <input type="radio" name="delivery-type" value="pickup" checked onchange="toggleDeliveryAddress()" class="sr-only">
-                                <i data-lucide="store" class="w-5 h-5 text-slate-600 mb-1"></i>
-                                <span class="text-xs font-medium text-slate-800">Retiro en Bodega</span>
-                            </label>
-                            <label class="border border-slate-200 rounded-xl p-3 flex flex-col items-center justify-center cursor-pointer hover:border-blue-500 transition has-[:checked]:border-blue-600 has-[:checked]:bg-blue-50/50">
-                                <input type="radio" name="delivery-type" value="delivery" onchange="toggleDeliveryAddress()" class="sr-only">
-                                <i data-lucide="truck" class="w-5 h-5 text-slate-600 mb-1"></i>
-                                <span class="text-xs font-medium text-slate-800">Delivery</span>
-                            </label>
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-xl bg-emerald-600 flex items-center justify-center text-white font-bold text-xl shadow-md">
+                            M
                         </div>
+                        <h3 class="font-bold text-lg text-white">Bodega Medina</h3>
                     </div>
-
-                    <div id="address-container" class="hidden">
-                        <label class="block text-xs font-semibold text-slate-700 mb-1">Dirección de Entrega</label>
-                        <textarea id="cust-address" rows="2" placeholder="Indicaciones o punto de referencia..." class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"></textarea>
-                    </div>
+                    <p class="text-xs text-slate-400 leading-relaxed">
+                        Tu bodega de confianza en Turmero. Productos de calidad, víveres frescos, panadería y la mejor atención comunitaria.
+                    </p>
+                    <p class="text-xs text-emerald-400 font-semibold">
+                        RIF: J-35735777-7
+                    </p>
                 </div>
 
-                <div class="pt-4 border-t border-slate-100 flex gap-2">
-                    <button onclick="goToStep(1)" class="w-1/3 bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold py-3 rounded-xl transition text-sm">
-                        Volver
-                    </button>
-                    <button onclick="goToStep(3)" class="w-2/3 bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded-xl shadow-lg transition text-sm flex items-center justify-center gap-2">
-                        <span>Siguiente</span>
-                        <i data-lucide="arrow-right" class="w-4 h-4"></i>
-                    </button>
-                </div>
-            </div>
-
-            <!-- STEP 3: MÉTODO DE PAGO Y CONFIRMACIÓN -->
-            <div id="checkout-step-3" class="hidden flex-grow overflow-y-auto p-4 space-y-4 flex flex-col justify-between">
+                <!-- Col 2: Contact Info -->
                 <div class="space-y-4">
-                    <div class="flex items-center gap-2 text-xs font-semibold text-blue-600 uppercase tracking-wider">
-                        <span>Paso 2 de 2</span> &bull; <span>Método de Pago</span>
-                    </div>
+                    <h4 class="text-white font-semibold text-sm uppercase tracking-wider">Contacto Directo</h4>
+                    <ul class="space-y-3 text-xs">
+                        <li class="flex items-center gap-2.5">
+                            <i data-lucide="map-pin" class="w-4 h-4 text-emerald-500 flex-shrink-0"></i>
+                            <span>Calle Principal, Sector Santa Rosa, Turmero, Aragua</span>
+                        </li>
+                        <li class="flex items-center gap-2.5">
+                            <i data-lucide="phone" class="w-4 h-4 text-emerald-500 flex-shrink-0"></i>
+                            <span>+58 412-0000000 / 0412-1234567</span>
+                        </li>
+                        <li class="flex items-center gap-2.5">
+                            <i data-lucide="mail" class="w-4 h-4 text-emerald-500 flex-shrink-0"></i>
+                            <span>bodegamedina.contacto@gmail.com</span>
+                        </li>
+                    </ul>
+                </div>
 
-                    <div class="space-y-2">
-                        <label class="block text-xs font-semibold text-slate-700">Selecciona la forma de pago:</label>
-                        
-                        <label class="flex items-center justify-between border border-slate-200 p-3.5 rounded-xl cursor-pointer hover:border-blue-500 transition has-[:checked]:border-blue-600 has-[:checked]:bg-blue-50/50">
-                            <div class="flex items-center gap-3">
-                                <input type="radio" name="payment-method" value="Pago Móvil" checked class="text-blue-600 focus:ring-blue-500">
-                                <span class="text-sm font-medium text-slate-800">Pago Móvil</span>
-                            </div>
-                            <i data-lucide="smartphone" class="w-5 h-5 text-slate-400"></i>
-                        </label>
-
-                        <label class="flex items-center justify-between border border-slate-200 p-3.5 rounded-xl cursor-pointer hover:border-blue-500 transition has-[:checked]:border-blue-600 has-[:checked]:bg-blue-50/50">
-                            <div class="flex items-center gap-3">
-                                <input type="radio" name="payment-method" value="Efectivo / Divisas ($)" class="text-blue-600 focus:ring-blue-500">
-                                <span class="text-sm font-medium text-slate-800">Efectivo / Divisas ($)</span>
-                            </div>
-                            <i data-lucide="banknote" class="w-5 h-5 text-slate-400"></i>
-                        </label>
-
-                        <label class="flex items-center justify-between border border-slate-200 p-3.5 rounded-xl cursor-pointer hover:border-blue-500 transition has-[:checked]:border-blue-600 has-[:checked]:bg-blue-50/50">
-                            <div class="flex items-center gap-3">
-                                <input type="radio" name="payment-method" value="Transferencia Bancaria" class="text-blue-600 focus:ring-blue-500">
-                                <span class="text-sm font-medium text-slate-800">Transferencia Bancaria</span>
-                            </div>
-                            <i data-lucide="building-2" class="w-5 h-5 text-slate-400"></i>
-                        </label>
-                    </div>
-
-                    <div class="p-3.5 bg-blue-50 border border-blue-100 rounded-xl space-y-1">
-                        <div class="flex justify-between text-xs text-blue-800 font-semibold">
-                            <span>Resumen del Pedido</span>
-                            <span id="final-total-display">$0.00</span>
+                <!-- Col 3: Delivery Partners (Ridery, PedidosYa, Yummy Rides) -->
+                <div class="space-y-4">
+                    <h4 class="text-white font-semibold text-sm uppercase tracking-wider">Aliados de Delivery</h4>
+                    <p class="text-xs text-slate-400">Pide tus productos a través de nuestras plataformas asociadas:</p>
+                    <div class="flex flex-wrap gap-3 pt-2">
+                        <!-- Ridery -->
+                        <div class="bg-slate-800 border border-slate-700 px-3.5 py-2 rounded-xl flex items-center gap-2 text-xs font-bold text-white shadow-sm">
+                            <span class="w-2.5 h-2.5 rounded-full bg-cyan-400"></span> Ridery
                         </div>
-                        <p class="text-[11px] text-blue-600">Al hacer clic en el botón de abajo, serás redirigido a WhatsApp con la información completa de tu pedido.</p>
+                        <!-- PedidosYa -->
+                        <div class="bg-slate-800 border border-slate-700 px-3.5 py-2 rounded-xl flex items-center gap-2 text-xs font-bold text-white shadow-sm">
+                            <span class="w-2.5 h-2.5 rounded-full bg-rose-500"></span> PedidosYa
+                        </div>
+                        <!-- Yummy Rides -->
+                        <div class="bg-slate-800 border border-slate-700 px-3.5 py-2 rounded-xl flex items-center gap-2 text-xs font-bold text-white shadow-sm">
+                            <span class="w-2.5 h-2.5 rounded-full bg-amber-400"></span> Yummy Rides
+                        </div>
                     </div>
                 </div>
 
-                <div class="pt-4 border-t border-slate-100 flex gap-2">
-                    <button onclick="goToStep(2)" class="w-1/3 bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold py-3 rounded-xl transition text-sm">
-                        Volver
-                    </button>
-                    <button onclick="sendWhatsAppOrder()" class="w-2/3 bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 rounded-xl shadow-lg transition text-sm flex items-center justify-center gap-2">
-                        <i data-lucide="message-circle" class="w-5 h-5"></i>
-                        <span>Confirmar Pedido</span>
-                    </button>
-                </div>
             </div>
 
+            <div class="pt-8 border-t border-slate-800 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-500">
+                <p>&copy; 2026 Bodega Medina. Todos los derechos reservados.</p>
+                <p class="mt-2 sm:mt-0">Atención rápida por WhatsApp • Tasa BCV Al Día</p>
+            </div>
         </div>
-    </div>
+    </footer>
 
     <script>
-        // Tasa BCV predeterminada de respaldo (se actualizará automáticamente en vivo)
+        // Tasa BCV predeterminada de respaldo
         let TASA_BCV = 888.39;
 
         // Función para consultar la tasa BCV oficial en tiempo real
@@ -310,7 +203,7 @@
                     console.log("Tasa BCV oficial obtenida en vivo:", TASA_BCV);
                 }
             } catch (error) {
-                console.log("No se pudo conectar a la API de tasas, usando valor por defecto:", TASA_BCV);
+                console.log("Usando tasa por defecto:", TASA_BCV);
             }
         }
 
@@ -328,7 +221,7 @@
             { id: 12, name: "Pan Campesino Grande", price: 1.80, category: "Pan", icon: "sandwich" },
             { id: 13, name: "Pan de Sándwich", price: 2.20, category: "Pan", icon: "sandwich" },
 
-            // Bebidas & Snacks (Unidos)
+            // Bebidas & Snacks
             { id: 20, name: "Caramelos Freegels", price: 0.50, category: "Bebidas & Snacks", icon: "cookie" },
             { id: 21, name: "Galletas TAM", price: 0.66, category: "Bebidas & Snacks", icon: "cookie" },
             { id: 22, name: "Caramelos de Menta", price: 0.05, category: "Bebidas & Snacks", icon: "cookie" },
@@ -361,7 +254,6 @@
         ];
 
         let activeTab = "Inicio";
-        let cart = [];
 
         async function init() {
             await cargarTasaBCVEnVivo();
@@ -390,7 +282,7 @@
                     <button onclick="selectCategory('${tab.id}')" 
                         class="flex items-center gap-2 px-4 py-3 border-b-2 font-semibold text-sm whitespace-nowrap transition ${
                             isActive 
-                            ? 'border-blue-600 text-blue-600 bg-blue-50/50 rounded-t-lg' 
+                            ? 'border-emerald-600 text-emerald-600 bg-emerald-50/50 rounded-t-lg' 
                             : 'border-transparent text-slate-600 hover:text-slate-900 hover:border-slate-300'
                         }">
                         <i data-lucide="${tab.icon}" class="w-4 h-4"></i>
@@ -456,19 +348,19 @@
                      data-usd="${p.price}">
                     <div>
                         <div class="flex items-start justify-between mb-4">
-                            <div class="p-3 bg-blue-50 text-blue-600 rounded-xl">
+                            <div class="p-3 bg-emerald-50 text-emerald-600 rounded-xl">
                                 <i data-lucide="${p.icon}" class="w-6 h-6"></i>
                             </div>
                             <span class="text-xs font-semibold px-2.5 py-1 bg-slate-100 text-slate-600 rounded-lg">${p.category}</span>
                         </div>
                         <h3 class="font-semibold text-slate-900">${p.name}</h3>
                         <div class="mt-1 select-none inline-block price-wrapper">
-                            <p class="text-lg font-bold text-blue-600 price-text transition-colors">$${p.price.toFixed(2)}</p>
+                            <p class="text-lg font-bold text-emerald-600 price-text transition-colors">$${p.price.toFixed(2)}</p>
                             <span class="text-[10px] text-slate-400 block -mt-1 font-medium price-sub">Tasa BCV (Pasa el cursor)</span>
                         </div>
                     </div>
-                    <button onclick="event.stopPropagation(); addToCart(${p.id})" class="mt-4 w-full bg-slate-900 hover:bg-slate-800 text-white font-medium py-2.5 rounded-xl transition flex items-center justify-center gap-2 text-sm">
-                        <i data-lucide="plus" class="w-4 h-4"></i> Agregar
+                    <button onclick="orderProduct('${p.name}', ${p.price})" class="mt-4 w-full bg-slate-900 hover:bg-emerald-600 text-white font-medium py-2.5 rounded-xl transition flex items-center justify-center gap-2 text-sm shadow-sm">
+                        <i data-lucide="message-circle" class="w-4 h-4"></i> Pedir por WhatsApp
                     </button>
                 </div>
             `).join("");
@@ -487,169 +379,26 @@
                 card.addEventListener('mouseenter', () => {
                     const bsPrice = usdPrice * TASA_BCV;
                     textElement.innerHTML = `${bsPrice.toLocaleString('es-VE', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} Bs`;
-                    textElement.classList.remove("text-blue-600");
-                    textElement.classList.add("text-emerald-600");
+                    textElement.classList.remove("text-emerald-600");
+                    textElement.classList.add("text-blue-600");
                     subText.innerText = "Tasa BCV oficial en vivo";
-                    subText.classList.add("text-emerald-600");
+                    subText.classList.add("text-blue-600");
                 });
 
                 card.addEventListener('mouseleave', () => {
                     textElement.innerHTML = `$${usdPrice.toFixed(2)}`;
-                    textElement.classList.remove("text-emerald-600");
-                    textElement.classList.add("text-blue-600");
+                    textElement.classList.remove("text-blue-600");
+                    textElement.classList.add("text-emerald-600");
                     subText.innerText = "Tasa BCV (Pasa el cursor)";
-                    subText.classList.remove("text-emerald-600");
+                    subText.classList.remove("text-blue-600");
                 });
             });
         }
 
-        function addToCart(productId) {
-            const product = products.find(p => p.id === productId);
-            const item = cart.find(c => c.id === productId);
-            if (item) {
-                item.quantity++;
-            } else {
-                cart.push({ ...product, quantity: 1 });
-            }
-            updateCartUI();
-        }
-
-        function updateCartUI() {
-            const badge = document.getElementById("cart-badge");
-            const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
-            badge.innerText = totalItems;
-            badge.classList.toggle("hidden", totalItems === 0);
-
-            const container = document.getElementById("cart-items");
-            const btnProceed = document.getElementById("btn-proceed");
-
-            if (cart.length === 0) {
-                container.innerHTML = `
-                    <div class="text-center py-12 space-y-3">
-                        <div class="w-16 h-16 bg-slate-100 text-slate-400 rounded-full flex items-center justify-center mx-auto">
-                            <i data-lucide="shopping-cart" class="w-8 h-8"></i>
-                        </div>
-                        <p class="text-slate-500 font-medium text-sm">Tu carrito está vacío</p>
-                        <p class="text-xs text-slate-400">Agrega productos del catálogo para comenzar</p>
-                    </div>
-                `;
-                btnProceed.disabled = true;
-            } else {
-                btnProceed.disabled = false;
-                container.innerHTML = cart.map(item => `
-                    <div class="flex items-center justify-between bg-slate-50 p-3.5 rounded-2xl border border-slate-200/85">
-                        <div class="flex-1 pr-3">
-                            <p class="font-semibold text-slate-900 text-sm leading-tight">${item.name}</p>
-                            <p class="text-xs text-blue-600 font-semibold mt-0.5">$${item.price.toFixed(2)} c/u</p>
-                        </div>
-                        <div class="flex items-center gap-2">
-                            <div class="flex items-center bg-white border border-slate-200 rounded-xl shadow-sm">
-                                <button onclick="changeQty(${item.id}, -1)" class="w-7 h-7 flex items-center justify-center text-slate-600 hover:bg-slate-100 rounded-l-xl transition">
-                                    <i data-lucide="minus" class="w-3.5 h-3.5"></i>
-                                </button>
-                                <span class="text-xs font-bold w-6 text-center text-slate-800">${item.quantity}</span>
-                                <button onclick="changeQty(${item.id}, 1)" class="w-7 h-7 flex items-center justify-center text-slate-600 hover:bg-slate-100 rounded-r-xl transition">
-                                    <i data-lucide="plus" class="w-3.5 h-3.5"></i>
-                                </button>
-                            </div>
-                            <button onclick="removeFromCart(${item.id})" class="p-1.5 text-rose-500 hover:text-rose-700 hover:bg-rose-50 rounded-lg transition">
-                                <i data-lucide="trash-2" class="w-4 h-4"></i>
-                            </button>
-                        </div>
-                    </div>
-                `).join("");
-            }
-
-            const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-            document.getElementById("cart-subtotal").innerText = `$${total.toFixed(2)}`;
-            document.getElementById("cart-total").innerText = `$${total.toFixed(2)}`;
-            document.getElementById("final-total-display").innerText = `$${total.toFixed(2)}`;
-            lucide.createIcons();
-        }
-
-        function changeQty(id, delta) {
-            const item = cart.find(c => c.id === id);
-            if (item) {
-                item.quantity += delta;
-                if (item.quantity <= 0) {
-                    removeFromCart(id);
-                    return;
-                }
-            }
-            updateCartUI();
-        }
-
-        function removeFromCart(id) {
-            cart = cart.filter(c => c.id !== id);
-            updateCartUI();
-        }
-
-        function clearCart() {
-            if (cart.length === 0) return;
-            if (confirm("¿Deseas vaciar todos los productos del carrito?")) {
-                cart = [];
-                updateCartUI();
-            }
-        }
-
-        function toggleCart() {
-            const drawer = document.getElementById("cart-drawer");
-            drawer.classList.toggle("opacity-0");
-            drawer.classList.toggle("pointer-events-none");
-            goToStep(1);
-        }
-
-        function goToStep(step) {
-            document.getElementById("checkout-step-1").classList.add("hidden");
-            document.getElementById("checkout-step-2").classList.add("hidden");
-            document.getElementById("checkout-step-3").classList.add("hidden");
-
-            const titles = {
-                1: "Tu Carrito de Compras",
-                2: "Datos de Entrega",
-                3: "Forma de Pago"
-            };
-
-            document.getElementById("cart-title").innerText = titles[step];
-            document.getElementById(`checkout-step-${step}`).classList.remove("hidden");
-        }
-
-        function toggleDeliveryAddress() {
-            const deliveryType = document.querySelector('input[name="delivery-type"]:checked').value;
-            const addressContainer = document.getElementById("address-container");
-            if (deliveryType === "delivery") {
-                addressContainer.classList.remove("hidden");
-            } else {
-                addressContainer.classList.add("hidden");
-            }
-        }
-
-        function sendWhatsAppOrder() {
-            const name = document.getElementById("cust-name").value.trim() || "Cliente";
-            const phone = document.getElementById("cust-phone").value.trim() || "No especificado";
-            const deliveryType = document.querySelector('input[name="delivery-type"]:checked').value;
-            const address = document.getElementById("cust-address").value.trim();
-            const paymentMethod = document.querySelector('input[name="payment-method"]:checked').value;
-
-            let text = `🛒 *NUEVO PEDIDO - BODEGA MEDINA*\n\n`;
-            text += `👤 *Cliente:* ${name}\n`;
-            text += `📞 *Teléfono:* ${phone}\n`;
-            text += `🚚 *Entrega:* ${deliveryType === 'delivery' ? 'Delivery a Domicilio' : 'Retiro en Bodega'}\n`;
-            if (deliveryType === 'delivery' && address) {
-                text += `📍 *Dirección:* ${address}\n`;
-            }
-            text += `💳 *Método de Pago:* ${paymentMethod}\n\n`;
-
-            text += `📋 *RESUMEN DEL PEDIDO:*\n`;
-            cart.forEach(item => {
-                text += `• ${item.quantity}x ${item.name} ($${(item.price * item.quantity).toFixed(2)})\n`;
-            });
-
-            const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-            text += `\n💵 *TOTAL A PAGAR:* $${total.toFixed(2)}`;
-
-            const whatsappNumber = "584120000000"; // Reemplaza por tu número de WhatsApp
-            window.open(`https://wa.me/${whatsappNumber}?text=${encodeURIComponent(text)}`, "_blank");
+        function orderProduct(name, price) {
+            const message = `Hola, me interesa ordenar el siguiente producto de la Bodega Medina:\n\n• *${name}* - $${price.toFixed(2)}\n\n¿Está disponible?`;
+            const whatsappNumber = "584120000000"; // Reemplaza con tu número de WhatsApp
+            window.open(`https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`, "_blank");
         }
 
         window.onload = init;
